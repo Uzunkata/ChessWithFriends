@@ -1,0 +1,21 @@
+<div class="backround"> 
+  <mat-toolbar color="black" style="width: 100%;">
+
+    <img src= "assets/images/chess white.png" width="30" height="50">
+
+    <span style="color: var(--main-light-color)"> Chess with friends</span>
+    <span class="flexExpand" ></span>
+
+    <div fxFlex fxLayoutAlign="flex-end center" style="width: 600px; height: 70%;">
+
+      <button *ngIf="!isLogedin" (click)="register()" pButton type="button" class="p-button-raised p-button center register">Register</button>
+
+      <button *ngIf="!isLogedin" (click)="login()" pButton type="button" class="p-button-raised p-button center loginlbtn">Log in</button>
+
+      <button *ngIf="isLogedin" (click)="logout()" pButton type="button" class="p-button-raised p-button center logoutlbtn">Logout</button>
+    </div>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+</div>

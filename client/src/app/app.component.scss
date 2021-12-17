@@ -1,0 +1,111 @@
+:host {
+    --main-dark-color: #0B0C10;
+    --secondary-dark-color: #1F2833;
+    --main-light-color: #66FCF1;
+    --secondary-light-color: #45A29E;
+  }
+
+::ng-deep.mat-toolbar {
+    
+    background-color: var(--main-dark-color);
+}
+
+.backround {
+  /* The image used */
+  background-image: url("https://wallpaperaccess.com/full/2003189.jpg");
+  /* Full height */
+  height: 100%;
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+span{
+  margin: 15px;
+}
+
+p-button {
+  margin-left: 8px;
+}
+
+.flexExpand {
+  flex: 1 1 auto;
+}
+
+.center {
+ display: inline;
+}
+
+.loginlbtn {
+  margin-left: 2%;
+  color : var(--main-light-color);
+  background-color: var(--secondary-dark-color);
+  width: 100px;
+
+}
+
+.loginlbtn:not([disabled]):hover {
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
+}
+
+.loginlbtn[disabled] {
+  color : var(--main-dark-color);
+  background-color: var(--main-light-color);
+}
+
+.register{
+  width: 100px;
+  margin-left: 65%;
+  background-color: var(--main-light-color);
+  color : var(--main-dark-color);
+}
+
+.register:not([disabled]):hover{
+  background-color: var(--secondary-light-color);
+  color: var(--main-dark-color);
+}
+
+.register[disabled]{
+  color : var(--main-dark-color);
+  background-color: var(--main-light-color);
+}
+
+.logoutlbtn {
+  margin-left: 85%;
+  text-align: center;
+  color : var(--main-light-color);
+  background-color: var(--secondary-dark-color);
+  width: 20%;
+
+}
+
+.logoutlbtn:not([disabled]):hover {
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
+}
+
+.logoutlbtn[disabled] {
+  color : var(--main-dark-color);
+  background-color: var(--main-light-color);
+}
+
+/* Extra small devices (phones, 600px and down) /
+@media only screen and (max-width: 600px) {...}
+
+/ Small devices (portrait tablets and large phones, 600px and up) /
+@media only screen and (min-width: 600px) {...}
+
+/ Medium devices (landscape tablets, 768px and up) /
+@media only screen and (min-width: 768px) {...}
+
+/ Large devices (laptops/desktops, 992px and up) /
+@media only screen and (min-width: 992px) {...}
+
+/ Extra large devices (large laptops and desktops, 1200px and up) */
+//  @media only screen and (max-width: 830) {
+
+// }
+

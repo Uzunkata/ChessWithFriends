@@ -1,0 +1,4 @@
+enum Provider{
+    GOOGLE,
+    LOCAL
+}

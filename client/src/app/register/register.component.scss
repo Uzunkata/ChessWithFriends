@@ -1,0 +1,82 @@
+.filed{
+    width: 100%;
+  }
+
+  label{
+    margin-top: 8px;
+    display: block;
+    height: 30px;
+    font-size: 20px;
+    color: var(--main-light-color);
+  }
+
+.registerFields {
+    margin: auto;
+    width: 50%;
+    padding: 10em;
+    border-radius: 25px;
+    max-width: 50rem;
+    background: linear-gradient(
+      250deg,
+      var(--secondary-light-color),
+      var(--secondary-dark-color) 80%,
+    );
+  }
+
+  .flex {
+    display: flex;
+  }
+  
+  ::ng-deep.p-password {
+    width: 100%;
+  
+    input {
+      width: 100%;
+    }
+  }
+
+  .center {
+    display: block;
+    margin: auto;
+    width: 80%;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .register{
+    width: 30%;
+    background-color: var(--main-light-color);
+    margin-bottom: 5%;
+    // margin-left: 35%;
+    color : var(--main-dark-color);
+}
+
+.register:not([disabled]):hover{
+    background-color: var(--secondary-light-color);
+    color: var(--main-dark-color);
+}
+
+.register[disabled]{
+    color : var(--main-dark-color);
+    background-color: var(--main-light-color);
+}
+
+.googlebtn {
+    width: 50%;
+    margin: auto;
+    background-color: var(--secondary-dark-color);
+    color: var(--main-light-color);;
+    margin-bottom: 5%;
+  }
+
+  .googlebtn:not([disabled]):hover{
+    background-color: var(--main-light-color);
+    color: var(--secondary-dark-color);
+  }
+
+  .googlebtn[disabled]{
+    color : var(--main-light-color);
+    background-color: var(--main-dark-color);
+  }
