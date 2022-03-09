@@ -1,0 +1,50 @@
+<br>
+<table class="chess_table"
+      [style.width.px]="boardSize"
+      [style.height.px]="boardSize"
+      (window:resize)="resize()">
+  <tr *ngFor="let row of game.board.rows; let y = index;">
+    <td [style.font-size.em]="fontSize"
+      *ngFor="let square of row.squares; let x = index;"
+      [style.width.px]="squareSize"
+      [style.height.px]="squareSize"
+      (click)="click(x,y)"
+      [style.background]="square.color"
+      [style.border]="square.border"
+      [ngClass]="square.piece && square.piece.color == 0 ? 'WP' : 'BP'"
+      [innerHTML]="square.piece == null ? '' : square.piece.htmlCode">
+    </td>
+  </tr>
+</table>
+
+<p-dialog header="Promotion" [(visible)]="promotionDialog" [position]="promotionDialogPosition" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      <div class="container-fluid custom-modal-container">
+        <div class="row custom-modal-header">
+            <div class="col-sm-12">
+                <h1>Promotion - Pick one</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+               <div class="jumbotron">
+                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Queen')">&#9819;</span>&nbsp;&nbsp;&nbsp;
+                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Knight')">&#9822;</span>&nbsp;&nbsp;&nbsp;
+                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Rook')">&#9820;</span>&nbsp;&nbsp;&nbsp;
+                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Bishop')">&#9821;</span>
+                </div>
+          </div>
+       </div>
+    </div>
+  </ng-template> 
+</p-dialog>
+
+<p-dialog [header]="this.title" [(visible)]="alertDialog" [position]="promotionDialogPosition" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p>{{this.body}}</p>
+    
+    <ng-template pTemplate="footer">
+        <p-button (click)="alertDialog=false" label="Ok" class="p-button-text"></p-button>
+    </ng-template> 
+</p-dialog>

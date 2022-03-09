@@ -2,7 +2,6 @@ package com.example.server.service;
 
 import com.example.server.dto.RecipientConfirmation;
 import com.example.server.exception.CustomException;
-import com.example.server.model.Recipient;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,7 +35,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
             helper.setSubject(recipient.getSubject());
             helper.setTo(recipient.getEmail());
-            String emailContent = getEmailContentConfrirmation(recipient, template);
+            String emailContent = getEmailContentConfirmation(recipient, template);
             helper.setText(emailContent, true);
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
@@ -44,17 +43,7 @@ public class EmailService {
         }
     }
 
-    public void sendEmail(Recipient recipient, String template) throws MessagingException, IOException, TemplateException {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setSubject(recipient.getSubject());
-        helper.setTo(recipient.getEmail());
-        String emailContent = getEmailContent(recipient, template);
-        helper.setText(emailContent, true);
-        javaMailSender.send(mimeMessage);
-    }
-
-    String getEmailContentConfrirmation(RecipientConfirmation recipientConfirmation, String template) throws IOException, TemplateException {
+    String getEmailContentConfirmation(RecipientConfirmation recipientConfirmation, String template) throws IOException, TemplateException {
         StringWriter stringWriter = new StringWriter();
         Map<String, Object> model = new HashMap<>();
         model.put(RECIPIENT, recipientConfirmation);
@@ -62,12 +51,5 @@ public class EmailService {
         return stringWriter.getBuffer().toString();
     }
 
-    String getEmailContent(Recipient recipient, String template) throws IOException, TemplateException {
-        StringWriter stringWriter = new StringWriter();
-        Map<String, Object> model = new HashMap<>();
-        model.put(RECIPIENT, recipient);
-        configuration.getTemplate(template).process(model, stringWriter);
-        return stringWriter.getBuffer().toString();
-    }
 }
 

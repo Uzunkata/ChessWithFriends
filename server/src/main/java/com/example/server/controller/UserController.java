@@ -13,7 +13,7 @@ import com.example.server.repository.UserRepository;
 import com.example.server.repository.VerifiedRepository;
 import com.example.server.security.JwtProvider;
 import com.example.server.service.EmailService;
-import com.example.server.util.Provider;
+//import com.example.server.util.Provider;
 import com.github.tsohr.JSONObject;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -68,7 +68,7 @@ public class UserController {
         if (existUser == null) {
             User newUser = new User();
             newUser.setUsername(email);
-            newUser.setProvider(Provider.GOOGLE);
+//            newUser.setProvider(Provider.GOOGLE);
 
             userRepository.save(newUser);
         }
@@ -80,7 +80,7 @@ public class UserController {
         if (userRepository.findByEmail(user.getEmail()) == null && user.getId() == 0) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setVerified(false);
-            user.setProvider(Provider.LOCAL);
+//            user.setProvider(Provider.LOCAL);
             userRepository.save(user);
 
             String hash = jwtProvider.generateEmailVerificationHash();

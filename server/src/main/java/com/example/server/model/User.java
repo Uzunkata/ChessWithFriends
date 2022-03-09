@@ -1,15 +1,10 @@
 package com.example.server.model;
 
-import com.example.server.util.Provider;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name="users")
 public class User {
-
-    @Enumerated(EnumType.STRING)
-    private Provider provider;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +21,6 @@ public class User {
 
     @Column
     private Boolean verified;
-
-    public Provider getProvider() {
-        return provider;
-    }
-
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
 
     public long getId() {
         return id;

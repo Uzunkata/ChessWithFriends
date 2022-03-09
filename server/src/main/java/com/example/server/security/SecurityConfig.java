@@ -2,7 +2,6 @@ package com.example.server.security;
 
 import com.example.server.security.filter.CustomAuthenticationFilter;
 import com.example.server.security.filter.CustomAuthorizationFilter;
-import com.example.server.service.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -29,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Autowired
-    private CustomOAuth2UserService oauthUserService;
+//    @Autowired
+//    private CustomOAuth2UserService oauthUserService;
 
     @Bean
     public CustomAuthorizationFilter customAuthorizationFilter() {
@@ -64,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/exception/*", "/api/login/**",
                         "/api/user/register/**", "/api/user/verify/**", "/api/user/send-password-reset/**",
-                        "/api/user/reset-password-request/**").permitAll();
+                        "/api/user/reset-password-request/**", "/game").permitAll();
 
         http.authorizeRequests().anyRequest().authenticated();
 //                .and()

@@ -13,11 +13,11 @@ import java.io.IOException;
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtProvider jwtProvider;// = new JwtProvider();
+    private JwtProvider jwtProvider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-            filterChain.doFilter(request, response);
+//            filterChain.doFilter(request, response);
 
         if(request.getServletPath().equals("/login") || request.getServletPath().equals("/api/user/send-password-reset")){
             filterChain.doFilter(request, response);

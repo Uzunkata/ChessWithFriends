@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './board/board.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { IsNotLoggedGuard } from './guard/is-not-logged.guard';
 import { RedirectGuard } from './guard/redirect.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { MatchmakingComponent } from './matchmaking/matchmaking.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { RegisterComponent } from './register/register.component';
 import { SendPasswordResetComponent } from './send-password-reset/send-password-reset.component';
@@ -42,6 +44,14 @@ const routes: Routes = [
     path: 'send-password-reset',
     component: SendPasswordResetComponent
   },
+  {
+    path: 'matchmaking',
+  component: MatchmakingComponent
+  },
+  {
+    path:'game/:gameUUID',
+    component: BoardComponent
+  }
 ];
 
 @NgModule({
