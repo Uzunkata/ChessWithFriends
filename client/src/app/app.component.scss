@@ -1,8 +1,8 @@
 :host {
-    --main-dark-color: #0B0C10;
-    --secondary-dark-color: #1F2833;
-    --main-light-color: #66FCF1;
-    --secondary-light-color: #45A29E;
+    --main-dark-color: #42281c;
+    --secondary-dark-color: #a35233;
+    --main-light-color: #f6d2ac;
+    --secondary-light-color: #d6834f;
   }
 
 ::ng-deep.mat-toolbar {
@@ -12,13 +12,14 @@
 
 .backround {
   /* The image used */
-  background-image: url("https://wallpaperaccess.com/full/2003189.jpg");
+  // background-image: url("https://wallpaperaccess.com/full/2003189.jpg");
   /* Full height */
-  height: 100%;
-  width: 100%;
+  background-color: var(--main-light-color);
+  // height: 100%;
+  // width: 100%;
   /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-position: center;
+  // background-repeat: no-repeat;
   background-size: cover;
 }
 

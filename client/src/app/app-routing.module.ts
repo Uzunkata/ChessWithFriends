@@ -46,11 +46,13 @@ const routes: Routes = [
   },
   {
     path: 'matchmaking',
-  component: MatchmakingComponent
+  component: MatchmakingComponent,
+  canActivate: [RedirectGuard]
   },
   {
     path:'game/:gameUUID',
-    component: BoardComponent
+    component: BoardComponent,
+    canActivate: [RedirectGuard]
   }
 ];
 
