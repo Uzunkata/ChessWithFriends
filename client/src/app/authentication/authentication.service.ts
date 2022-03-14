@@ -15,13 +15,14 @@ export class AuthenticationService {
 
   //@ts-ignore
   user: string;
-  //TODO
-  isGoogle = false;
+  // //TODO
+  // isGoogle = false;
+  public gameURL: string = '';
 
   constructor(private http: HttpClient, private router: Router) {
     //@ts-ignore
 
-    this.user = this.getUser(window.localStorage.getItem("access_token"));
+    this.user = this.getUsername(window.localStorage.getItem("access_token"));
   }
 
 
@@ -31,7 +32,7 @@ export class AuthenticationService {
       window.localStorage.setItem("access_token", tokens.access_token)
 
       this.router.navigateByUrl('/home');
-      this.user = this.getUser(tokens.access_token);
+      this.user = this.getUsername(tokens.access_token);
       //this.accessToken = tokens.access_token;
 
       window.location.reload();
@@ -42,19 +43,23 @@ export class AuthenticationService {
 
   }
 
-  private getUser(token: string){
+  getUsername(token: string){
 
     if(!this.checkLogin()){
       return null;
     }
 
     if(token == null){
-      return this.user;
+      return null;
     }
 
-    var x = JSON.parse(atob(token.split('.')[1]));
-    console.log(x);
-    return JSON.parse(atob(token.split('.')[1]));
+    // var x = JSON.parse(atob(token.split('.')[1]));
+    // console.log(x);
+    let payloadEncoded = token.split('.')[1];
+    let payloadDecoded = atob(payloadEncoded);
+    let payload = JSON.parse(payloadDecoded);
+    // let username = JSON.parse(payload.sub);
+    return payload.sub;
   }
 
   checkLogin() {

@@ -102,7 +102,7 @@ public class GameHandler extends TextWebSocketHandler {
     }
 
     private void joinGame(Message message, WebSocketSession session) throws IOException {
-        Player assignedPlayer = this.gameController.joinGame(message.gameUUID, message.playerUUID);
+        Player assignedPlayer = this.gameController.joinGame(message.gameUUID, message.username);
         this.addWebSocketSessionIdToGame(message.gameUUID, session.getId());
         ReturnMessage returnMessage = new ReturnMessage();
         returnMessage.type = "joinGame";

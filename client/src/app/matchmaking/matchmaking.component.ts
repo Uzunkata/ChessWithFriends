@@ -15,7 +15,7 @@ export class MatchmakingComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
-    localStorage.clear();
+    // localStorage.clear();
   }
 
   play() {

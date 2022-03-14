@@ -1,13 +1,13 @@
 package com.example.server.websocket;
 
+import com.example.server.Storage;
 import com.example.server.chess.Game;
+import com.example.server.chess.Movement;
 import com.example.server.chess.Player;
 import com.example.server.chess.Position;
-import com.example.server.Storage;
-import com.example.server.chess.Movement;
 import com.example.server.chess.piece.Piece;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -28,29 +28,31 @@ public class GameController {
         return (Game) Storage.get(uuid);
     }
 
-    public Player joinGame(String gameUUID, String playerUUID) {
+    public Player joinGame(String gameUUID, String username) {
         Game game = this.getGameByUUID(gameUUID);
         if (game == null) {
             return null;
         }
-        Player player = game.getPlayerByUUID(playerUUID);
+        Player player = game.getPlayerByUsername(username);
         if (player != null) {
-            if (game.getPlayer1().getUUID().equals(playerUUID)) {
+            if (game.getPlayer1().getUsername().equals(username)) {
                 player.setColor(Piece.WHITE);
-            }else if (game.getPlayer2().getUUID().equals(playerUUID)) {
+            }else if (game.getPlayer2().getUsername().equals(username)) {
                 player.setColor(Piece.BLACK);
             }
         }else {
             if (game.getPlayer1() == null) {
-                player = new Player();
+                player = new Player(username);
                 player.setColor(Piece.WHITE);
                 game.setPlayer1(player);
+                System.out.println(game.getPlayer1().getUsername());
             }else if (game.getPlayer2() == null) {
-                player = new Player();
+                player = new Player(username);
                 player.setColor(Piece.BLACK);
                 game.setPlayer2(player);
+                System.out.println(game.getPlayer2().getUsername());
             }else {
-                player = new Player();
+                player = new Player(username);
                 player.setColor(2);
             }
         }

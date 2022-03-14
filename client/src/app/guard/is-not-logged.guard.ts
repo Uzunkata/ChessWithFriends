@@ -7,18 +7,29 @@ import { AuthenticationService } from '../authentication/authentication.service'
   providedIn: 'root'
 })
 export class IsNotLoggedGuard implements CanActivate {
-  constructor(private authenticationService :AuthenticationService, private router: Router){}
+
+  curentURL: string;
+
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if(!this.authenticationService.checkLogin()){
-        return true;
-        }
+    if (!this.authenticationService.checkLogin()) {
+      return true;
+    }
 
-        this.router.navigateByUrl('/home');
+     this.curentURL = localStorage.getItem('gameURL') || "";
+
+    if(localStorage.getItem('gameURL')){
+      this.router.navigateByUrl(this.curentURL);
+      localStorage.removeItem('gameURL')
+    }else{
+      this.router.navigateByUrl('/home');
+    }
+
     return false;
   }
-  
+
 }

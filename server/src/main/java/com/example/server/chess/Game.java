@@ -54,10 +54,10 @@ public class Game implements Serializable {
         this.player2 = player;
     }
 
-    public Player getPlayerByUUID(String uuid) {
-        if (this.player1 != null && this.player1.getUUID().equals(uuid)) {
+    public Player getPlayerByUsername(String username) {
+        if (this.player1 != null && this.player1.getUsername().equals(username)) {
             return player1;
-        }else if (this.player2 != null && this.player2.getUUID().equals(uuid)) {
+        }else if (this.player2 != null && this.player2.getUsername().equals(username)) {
             return player2;
         }else {
             return null;

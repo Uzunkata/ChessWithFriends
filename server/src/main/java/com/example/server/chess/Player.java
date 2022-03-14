@@ -1,24 +1,25 @@
 package com.example.server.chess;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 public class Player implements Serializable {
-    private String uuid;
+//    private String uuid;
     private int color;
+    private String username;
 
-    public Player() {
-        this.uuid = UUID.randomUUID().toString();
+    public Player(String username) {
+//        this.uuid = UUID.randomUUID().toString();
         this.color = 2;//a spectator until color is set
+        this.username = username;
     }
 
-    public Player(String uuid) {
-        this.uuid = uuid;
-    }
+//    public Player(String uuid) {
+//        this.uuid = uuid;
+//    }
 
-    public String getUUID() {
-        return this.uuid;
-    }
+//    public String getUUID() {
+//        return this.uuid;
+//    }
 
     public int getColor() {
         return this.color;
@@ -28,4 +29,7 @@ public class Player implements Serializable {
         this.color = color;
     }
 
+    public String getUsername(){
+        return this.username;
+    }
 }

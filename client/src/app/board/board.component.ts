@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../model/User';
 import { $WebSocket } from '../web-socket/websocket.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 // import { Overlay, overlayConfigFactory } from 'angular2-modal';
 // import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 // import { PromotionModalContext, PromotionModal } from '../promotion-modal';
@@ -21,9 +23,14 @@ export class BoardComponent implements OnInit {
   private sub: any;
   private movement: Movement;
   private myColor: number = 0;
-  private myPlayerUUID: string = '';
+  private user: User = {} as User;
+  // private myPlayerUUID: string = '';
   private lastStatus: number = 0;
   game: any;
+
+  token: any;
+  isLogedin = false;
+  username: string;
 
   promotionDialog: boolean;
   alertDialog: boolean;
@@ -37,9 +44,14 @@ export class BoardComponent implements OnInit {
       //overlay: Overlay,
       vcRef: ViewContainerRef,
       //public modal: Modal
+      authenticationService: AuthenticationService
       ) {
     this.movement = { position1: { x: null, y: null }, position2: { x: null, y: null } };
     //overlay.defaultViewContainer = vcRef;
+    this.isLogedin = authenticationService.checkLogin();
+    this.token = window.localStorage.getItem("access_token");
+    this.username = authenticationService.getUsername(this.token);
+    localStorage.setItem("myPlayerUsername", this.username);
   }
 
   ngOnInit() {
@@ -49,8 +61,14 @@ export class BoardComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.game.board.rows = [];
       this.gameUUID = params["gameUUID"];
-      if (localStorage.getItem("myPlayerUUID" + params["gameUUID"])) {
-        this.myPlayerUUID = localStorage.getItem("myPlayerUUID" + params["gameUUID"]) || '';
+      // if (localStorage.getItem("myPlayerUUID" + params["gameUUID"])) {
+      //   // this.myPlayerUUID = localStorage.getItem("myPlayerUUID" + params["gameUUID"]) || '';
+      // }
+      if(!localStorage.getItem("gameUUID")){
+        localStorage.setItem("gameUUID", this.gameUUID);
+      }
+      if (localStorage.getItem("myPlayerUsername")) {
+      this.username = localStorage.getItem("myPlayerUsername") || "";
       }
       this.ws = new $WebSocket();
       this.subscribeToWebSocket();
@@ -85,7 +103,8 @@ export class BoardComponent implements OnInit {
       action: 'requestPossibleMovements',
       movement: movement,
       gameUUID: this.gameUUID,
-      playerUUID: this.myPlayerUUID,
+      username: this.username,
+      // playerUUID: this.myPlayerUUID,
       requestUUID: null,
       promoteTo: null
     }
@@ -104,7 +123,8 @@ export class BoardComponent implements OnInit {
       action: 'move',
       movement: this.movement,
       gameUUID: this.gameUUID,
-      playerUUID: this.myPlayerUUID,
+      username: this.username,
+      // playerUUID: this.myPlayerUUID,
       requestUUID: null,
       promoteTo: null
     }
@@ -139,7 +159,8 @@ export class BoardComponent implements OnInit {
       action: 'requestUpdate',
       movement: null,
       gameUUID: this.gameUUID,
-      playerUUID: this.myPlayerUUID,
+      username: this.username,
+      // playerUUID: this.myPlayerUUID,
       requestUUID: null,
       promoteTo: null
     }
@@ -150,7 +171,8 @@ export class BoardComponent implements OnInit {
     this.requestUUID = this.generateUUID();
     let message: Message = {
       action: 'joinGame',
-      playerUUID: this.myPlayerUUID,
+      username: this.username,
+      // playerUUID: this.myPlayerUUID,
       movement: null,
       gameUUID: this.gameUUID,
       requestUUID: this.requestUUID,
@@ -161,9 +183,11 @@ export class BoardComponent implements OnInit {
 
   joinGame(player: any) {
     if (player != null) {
-      this.myPlayerUUID = player.uuid;
+      // this.myPlayerUUID = player.uuid;
       this.myColor = player.color;
-      localStorage.setItem("myPlayerUUID" + this.gameUUID, player.uuid);
+      this.username = player.username;
+      // localStorage.setItem("myPlayerUUID" + this.gameUUID, player.uuid);
+      localStorage.setItem("myPlayerUsername", this.username);
     }
   }
 
@@ -273,7 +297,8 @@ export class BoardComponent implements OnInit {
       action: 'doPromote',
       movement: null,
       gameUUID: this.gameUUID,
-      playerUUID: this.myPlayerUUID,
+      username: this.username,
+      // playerUUID: this.myPlayerUUID,
       requestUUID: null,
       promoteTo: piece
     }
@@ -322,7 +347,8 @@ interface Message {
   action: string;
   movement: Movement | null;
   gameUUID: string;
-  playerUUID: string;
+  username: String;
+  // playerUUID: string;
   requestUUID: string | null;
   promoteTo: string | null;
 }

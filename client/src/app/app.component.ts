@@ -11,11 +11,11 @@ import { AuthenticationService } from './authentication/authentication.service';
 export class AppComponent {
   title = 'frontend';
   isLogedin = false;
-  isGoogle = false;
+  // isGoogle = false;
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private messageService: MessageService){
     this.isLogedin = authenticationService.checkLogin();
-    this.isGoogle = authenticationService.isGoogle;
+    // this.isGoogle = authenticationService.isGoogle;
   }
 
   login() {
@@ -27,11 +27,11 @@ export class AppComponent {
   }
 
   logout() {
-    console.log("aaaaaaaaaa");
     window.localStorage.removeItem("access_token");
-    window.localStorage.removeItem("refresh_token");
+    // window.localStorage.removeItem("refresh_token");
     this.isLogedin = false;
     window.location.reload();
+    window.localStorage.clear();
 
     window.location.replace('/login');
   }
