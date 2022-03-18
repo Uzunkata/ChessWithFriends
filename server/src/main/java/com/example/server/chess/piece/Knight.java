@@ -3,29 +3,30 @@ package com.example.server.chess.piece;
 import com.example.server.chess.Board;
 import com.example.server.chess.Direction;
 import com.example.server.chess.Position;
+import com.example.server.utils.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Knight implements Piece, Serializable {
     private String htmlCode;
-    private int color;
+    private Color color;
     private boolean moved;
 
-    public Knight(int color) {
+    public Knight(Color color) {
         this.color = color;
         this.initHtmlCode();
     }
 
     private void initHtmlCode() {
-        if (this.color == Piece.WHITE) {
+        if (this.color == Color.WHITE) {
             this.htmlCode = "&#9816;";
         }else {
             this.htmlCode = "&#9822;";
         }
     }
 
-    public int getColor() {
+    public Color getColor() {
         return this.color;
     }
 

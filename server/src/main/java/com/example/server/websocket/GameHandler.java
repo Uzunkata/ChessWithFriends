@@ -1,11 +1,12 @@
 package com.example.server.websocket;
 
 import com.example.server.chess.Game;
-import com.example.server.chess.Player;
 import com.example.server.chess.Movement;
+import com.example.server.chess.Player;
 import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -19,7 +20,10 @@ import java.util.HashMap;
 public class GameHandler extends TextWebSocketHandler {
     private static ArrayList<WebSocketSession> sessions;
     private static HashMap<String, ArrayList<String>> webSocketSessionIdsByGame;
-    private static GameController gameController;
+
+    @Autowired
+    private GameController gameController;
+
     private static Gson gson;
     private static final Logger logger = LogManager.getLogger(GameHandler.class);
     private static final String NEW_GAME = "newGame";
@@ -31,9 +35,9 @@ public class GameHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        if (this.gameController == null) {
-            this.gameController = new GameController();
-        }
+//        if (this.gameController == null) {
+//            this.gameController = new GameController();
+//        }
         if (this.sessions == null) {
             this.sessions = new ArrayList<WebSocketSession>();
         }

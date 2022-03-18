@@ -1,6 +1,7 @@
 package com.example.server.chess;
 
 import com.example.server.chess.piece.*;
+import com.example.server.utils.Color;
 
 import java.io.Serializable;
 
@@ -16,47 +17,47 @@ public class Board implements Serializable {
     private void initBoard() {
         this.rows = new Row[8];
         this.rows[0] = new Row(new Piece[]{
-                new Rook(Piece.BLACK),
-                new Knight(Piece.BLACK),
-                new Bishop(Piece.BLACK),
-                new Queen(Piece.BLACK),
-                new King(Piece.BLACK),
-                new Bishop(Piece.BLACK),
-                new Knight(Piece.BLACK),
-                new Rook(Piece.BLACK)
+                new Rook(Color.BLACK),
+                new Knight(Color.BLACK),
+                new Bishop(Color.BLACK),
+                new Queen(Color.BLACK),
+                new King(Color.BLACK),
+                new Bishop(Color.BLACK),
+                new Knight(Color.BLACK),
+                new Rook(Color.BLACK)
         }, 0);
         this.rows[1] = new Row(new Piece[]{
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK),
-                new Pawn(Piece.BLACK)
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK),
+                new Pawn(Color.BLACK)
         }, 1);
         for (int i = 2; i < 6; i++) {
             this.rows[i] = new Row(i);
         }
         this.rows[6] = new Row(new Piece[]{
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE),
-                new Pawn(Piece.WHITE)
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE),
+                new Pawn(Color.WHITE)
         }, 6);
         this.rows[7] = new Row(new Piece[]{
-                new Rook(Piece.WHITE),
-                new Knight(Piece.WHITE),
-                new Bishop(Piece.WHITE),
-                new Queen(Piece.WHITE),
-                new King(Piece.WHITE),
-                new Bishop(Piece.WHITE),
-                new Knight(Piece.WHITE),
-                new Rook(Piece.WHITE)
+                new Rook(Color.WHITE),
+                new Knight(Color.WHITE),
+                new Bishop(Color.WHITE),
+                new Queen(Color.WHITE),
+                new King(Color.WHITE),
+                new Bishop(Color.WHITE),
+                new Knight(Color.WHITE),
+                new Rook(Color.WHITE)
         }, 7);
     }
 
@@ -72,7 +73,7 @@ public class Board implements Serializable {
         return this.rows[position.getY()].getSquares()[position.getX()].getPiece();
     }
 
-    public Position getKingPosition(int color) {
+    public Position getKingPosition(Color color) {
         for (int x=0; x<=7; x++) {
             for (int y=0; y<=7; y++) {
                 Piece piece = this.rows[y].getSquares()[x].getPiece();

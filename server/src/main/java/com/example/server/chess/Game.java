@@ -2,6 +2,8 @@ package com.example.server.chess;
 
 
 import com.example.server.chess.piece.*;
+import com.example.server.utils.Status;
+import com.example.server.utils.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,25 +13,28 @@ public class Game implements Serializable {
     private Board board;
     private Player player1;
     private Player player2;
+    private String winner;
     private String uuid;
-    private int status;
-    private int turnColor;
+    private Status status;
+    private Color turnColor;
     private boolean isPromotion;
     private Movement lastMovement;
     private Piece lastPieceAtPosition1;
     private Piece lastPieceAtPosition2;
     private Date dateStarted;
 
-    public static final int STARTED = 0;
-    public static final int CHECK = 1;
-    public static final int CHECKMATE = 2;
 
+//    ArrayList<Position> debuging = new ArrayList<>();
+
+//    public static final int STARTED = 0;
+//    public static final int CHECK = 1;
+//    public static final int CHECKMATE = 2;
 
     public Game(String uuid) {
         this.board = new Board();
         this.uuid = uuid;
-        this.status = STARTED;
-        this.turnColor = Piece.WHITE;
+        this.status = Status.STARTED;
+        this.turnColor = Color.WHITE;
         this.isPromotion = false;
         this.dateStarted = new Date();
     }
@@ -54,10 +59,24 @@ public class Game implements Serializable {
         this.player2 = player;
     }
 
+    public String getWinner() {
+        return winner;
+    }
+
     public Player getPlayerByUsername(String username) {
         if (this.player1 != null && this.player1.getUsername().equals(username)) {
             return player1;
         }else if (this.player2 != null && this.player2.getUsername().equals(username)) {
+            return player2;
+        }else {
+            return null;
+        }
+    }
+
+    public Player getPlayerByColor(Color color){
+        if (this.player1 != null && this.player1.getColor() == color) {
+            return player1;
+        }else if (this.player2 != null && this.player2.getColor() == color) {
             return player2;
         }else {
             return null;
@@ -79,7 +98,7 @@ public class Game implements Serializable {
         this.updateStatus();
     }
 
-    public Piece getNewPieceByName(String name, int color) {
+    public Piece getNewPieceByName(String name, Color color) {
         if (name.equals("Queen")) {
             return new Queen(color);
         } else if (name.equals("Knight")) {
@@ -99,11 +118,11 @@ public class Game implements Serializable {
         for (Position position: positions) {
             Piece piece = this.board.getPieceAt(position);
             if (piece.getClass().equals(Pawn.class) &&
-                    piece.getColor() == Piece.WHITE &&
+                    piece.getColor() == Color.WHITE &&
                     position.getY() == 0) {
                 return position;
             } else if (piece.getClass().equals(Pawn.class) &&
-                    piece.getColor() == Piece.BLACK &&
+                    piece.getColor() == Color.BLACK &&
                     position.getY() == 7) {
                 return position;
             }
@@ -111,17 +130,21 @@ public class Game implements Serializable {
         return null;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
     private void updateStatus() throws Exception {
-        if (this.isOnCheckMate(Piece.WHITE) || this.isOnCheckMate(Piece.BLACK)) {
-            this.status = CHECKMATE;
-        } else if (this.isOnCheck(Piece.WHITE) || this.isOnCheck(Piece.BLACK)) {
-            this.status = CHECK;
+        if (this.isOnCheckMate(Color.BLACK)) {
+            this.status = Status.CHECKMATE;
+            this.winner = getPlayerByColor(Color.WHITE).getUsername();
+        }else if (this.isOnCheckMate(Color.WHITE)) {
+            this.status = Status.CHECKMATE;
+            this.winner = getPlayerByColor(Color.BLACK).getUsername();
+        } else if (this.isOnCheck(Color.WHITE) || this.isOnCheck(Color.BLACK)) {
+            this.status = Status.CHECK;
         } else {
-            this.status = STARTED;
+            this.status = Status.STARTED;
         }
     }
 
@@ -132,13 +155,13 @@ public class Game implements Serializable {
             return;
         }
         if (piece.getClass().equals(Pawn.class) &&
-                piece.getColor() == Piece.WHITE &&
+                piece.getColor() == Color.WHITE &&
                 movement.getPosition2().getY() == 0) {
             this.switchTurnColor();
             this.isPromotion = true;
             return;
         } else if (piece.getClass().equals(Pawn.class) &&
-                piece.getColor() == Piece.BLACK &&
+                piece.getColor() == Color.BLACK &&
                 movement.getPosition2().getY() == 7) {
             this.switchTurnColor();
             this.isPromotion = true;
@@ -147,7 +170,7 @@ public class Game implements Serializable {
         this.isPromotion = false;
     }
 
-    public int getTurnColor() {
+    public Color getTurnColor() {
         return this.turnColor;
     }
 
@@ -169,7 +192,7 @@ public class Game implements Serializable {
             // and if player is not, or will not be checked
             if (movement.equals(possibleMovement) &&
                     !this.isOnCheckAfterMovement(movement) &&
-                    this.status != CHECKMATE) {
+                    this.status != Status.CHECKMATE) {
                 //if the move is a castling
                 if (this.isCastling(movement)) {
                     this.doCastling(movement);
@@ -227,10 +250,10 @@ public class Game implements Serializable {
     }
 
     private void switchTurnColor() {
-        if (this.turnColor == Piece.WHITE) {
-            this.turnColor = Piece.BLACK;
+        if (this.turnColor == Color.WHITE) {
+            this.turnColor = Color.BLACK;
         } else {
-            this.turnColor = Piece.WHITE;
+            this.turnColor = Color.WHITE;
         }
     }
 
@@ -305,7 +328,7 @@ public class Game implements Serializable {
 
     //returns all pieces on the board from the given color
     //if the given color is null, return all piece positions
-    public Position[] getAllPiecesPositions(Integer color) {
+    public Position[] getAllPiecesPositions(Color color) {
         ArrayList<Position> positions = new ArrayList<Position>();
         for (int x=0; x<=7; x++) {
             for (int y=0; y<=7; y++) {
@@ -318,15 +341,15 @@ public class Game implements Serializable {
         return positions.toArray(new Position[0]);
     }
 
-    private int getEnemyColor(int color) {
-        if (color == Piece.WHITE) return Piece.BLACK;
-        else return Piece.WHITE;
+    private Color getEnemyColor(Color color) {
+        if (color == Color.WHITE) return Color.BLACK;
+        else return Color.WHITE;
     }
 
     //makes the move, after which cheks if there is a check,
     //and then reverses the move
     public boolean isOnCheckAfterMovement(Movement movement) {
-        int color = this.board.getPieceAt(movement.getPosition1()).getColor();
+        Color color = this.board.getPieceAt(movement.getPosition1()).getColor();
         Piece pieceAtPosition1 = this.board.getPieceAt(movement.getPosition1());
         Piece pieceAtPosition2 = this.board.getPieceAt(movement.getPosition2());
         this.board.setPieceAt(movement.getPosition1(), null);
@@ -338,7 +361,7 @@ public class Game implements Serializable {
     }
 
     //returns true if the given player color is on check mate
-    private boolean isOnCheckMate(int color) throws Exception {
+    private boolean isOnCheckMate(Color color) throws Exception {
         Position allPositions[] = this.getAllPiecesPositions(color);
         //loops trough all positions on the board, that are under control of the given player (color)
         for (Position position: allPositions) {
@@ -354,22 +377,26 @@ public class Game implements Serializable {
                 if (moved) this.undoMove();
                 //return false if he can make the move, because he will not be checked after it
                 //if he is still checked, continue the loop
-                if (!isOnCheck) return false;
+                if (!isOnCheck){
+                    System.out.println();
+                    return false;
+                }
             }
         }
-        this.status = CHECKMATE;
+//        this.status = Status.CHECKMATE;
+//        this.winner = getPlayerByColor(color);
         return true;
     }
 
     //returns true if the given player color is being checked
-    private boolean isOnCheck(int color) {
-        int enemyColor = this.getEnemyColor(color);
+    private boolean isOnCheck(Color color) {
+        Color enemyColor = this.getEnemyColor(color);
         Position allEnemyPositions[] = this.getAllPiecesPositions(enemyColor);
         //loop trough all the pieces on the board from the enemy color
         //and returns true if any of them is threatening the king
         for (Position enemyPosition: allEnemyPositions) {
             if (this.pieceCanHitEnemyKing(enemyPosition)){
-                this.status = CHECK;
+                this.status = Status.CHECK;
                 return true;
             }
         }

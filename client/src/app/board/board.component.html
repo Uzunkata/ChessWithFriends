@@ -11,7 +11,7 @@
       (click)="click(x,y)"
       [style.background]="square.color"
       [style.border]="square.border"
-      [ngClass]="square.piece && square.piece.color == 0 ? 'WP' : 'BP'"
+      [ngClass]="square.piece && square.piece.color == 'WHITE' ? 'WP' : 'BP'"
       [innerHTML]="square.piece == null ? '' : square.piece.htmlCode">
     </td>
   </tr>

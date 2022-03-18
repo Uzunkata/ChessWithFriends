@@ -3,29 +3,30 @@ package com.example.server.chess.piece;
 import com.example.server.chess.Board;
 import com.example.server.chess.Direction;
 import com.example.server.chess.Position;
+import com.example.server.utils.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Pawn implements Piece, Serializable {
     private String htmlCode;
-    private int color;
+    private Color color;
     private boolean moved;
 
-    public Pawn(int color) {
+    public Pawn(Color color) {
         this.color = color;
         this.initHtmlCode();
     }
 
     private void initHtmlCode() {
-        if (this.color == Piece.WHITE) {
+        if (this.color == Color.WHITE) {
             this.htmlCode = "&#9817;";
         }else {
             this.htmlCode = "&#9823;";
         }
     }
 
-    public int getColor() {
+    public Color getColor() {
         return this.color;
     }
 
@@ -40,11 +41,11 @@ public class Pawn implements Piece, Serializable {
     public Direction[] getDirections(Board board, Position position) {
         ArrayList<Direction> directions = new ArrayList<Direction>();
         int delta = 1;
-        if (this.color == Piece.BLACK) {
+        if (this.color == Color.BLACK) {
             delta = -1;
         }
-        if (((position.getY() == 6 && this.getColor() == Piece.WHITE) ||
-                (position.getY() == 1 && this.getColor() == Piece.BLACK)) &&
+        if (((position.getY() == 6 && this.getColor() == Color.WHITE) ||
+                (position.getY() == 1 && this.getColor() == Color.BLACK)) &&
                 board.getPieceAt(new Position(position.getX(), position.getY()-(2*delta))) == null &&
                 board.getPieceAt(new Position(position.getX(), position.getY()-(1*delta))) == null) {
             directions.add(new Direction(0, -1*delta, 2));//move straight two squares

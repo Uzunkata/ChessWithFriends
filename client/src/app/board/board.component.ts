@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../model/User';
 import { $WebSocket } from '../web-socket/websocket.service';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { Status } from '../utils/Status';
+import { Color } from '../utils/Color';
 // import { Overlay, overlayConfigFactory } from 'angular2-modal';
 // import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 // import { PromotionModalContext, PromotionModal } from '../promotion-modal';
@@ -22,10 +24,10 @@ export class BoardComponent implements OnInit {
   private requestUUID: string = '';
   private sub: any;
   private movement: Movement;
-  private myColor: number = 0;
+  private myColor: Color;
   private user: User = {} as User;
   // private myPlayerUUID: string = '';
-  private lastStatus: number = 0;
+  private lastStatus: number;
   game: any;
 
   token: any;
@@ -79,7 +81,7 @@ export class BoardComponent implements OnInit {
 
   click(x: any, y: any) {
     this.resetColors();
-    if (this.game.status == 2) {
+    if (this.game.status == Status.CHECKMATE) {
       return;
     }
     if (this.game.board.rows[y].squares[x].piece &&
@@ -94,9 +96,9 @@ export class BoardComponent implements OnInit {
     if (this.game.turnColor != this.myColor) {
       return;
     }
-    this.game.board.rows[y].squares[x].border = "2px solid white";
+    this.game.board.rows[y].squares[x].border = "5px solid lightgreen";
     let movement = { position1: { x: x, y: y }, position2: { x: null, y: null } };
-    if (this.myColor == 1) {
+    if (this.myColor == Color.BLACK) {
       movement = { position1: { x: 7 - x, y: 7 - y }, position2: { x: null, y: null } }
     }
     let message: Message = {
@@ -115,7 +117,7 @@ export class BoardComponent implements OnInit {
   completeMovement(x: number, y: number) {
     this.movement.position2.x = x;
     this.movement.position2.y = y;
-    if (this.myColor == 1) {
+    if (this.myColor == Color.BLACK) {
       this.movement.position2.x = 7 - x;
       this.movement.position2.y = 7 - y;
     }
@@ -208,18 +210,18 @@ export class BoardComponent implements OnInit {
       return;
     }
     for (let movement of availableMovements) {
-      if (this.myColor == 1) {
+      if (this.myColor == Color.BLACK) {
         movement.position2.x = 7 - movement.position2.x;
         movement.position2.y = 7 - movement.position2.y;
       }
-      this.game.board.rows[movement.position2.y].squares[movement.position2.x].border = "2px solid white";
+      this.game.board.rows[movement.position2.y].squares[movement.position2.x].border = "5px solid lightgreen";
     }
   }
 
   updateBoard(game: any) {
-    if (game.status == 1 &&
+    if (game.status == Status.CHECK &&
       game.status != this.lastStatus &&
-      this.myColor != 2 &&
+      this.myColor != Color.SPECTATOR &&
       this.myColor == game.turnColor) {
       // this.modal.alert()
       //   .title('CHECK')
@@ -229,9 +231,9 @@ export class BoardComponent implements OnInit {
       this.title = 'CHECK';
       this.body = 'You are in CHECK.';
     }
-    if (game.status == 2 &&
+    if (game.status == Status.CHECKMATE &&
       game.status != this.lastStatus &&
-      this.myColor != 2 &&
+      this.myColor != Color.SPECTATOR &&
       this.myColor == game.turnColor) {
       // this.modal.alert()
       //   .title('CHECKMATE')
@@ -241,9 +243,9 @@ export class BoardComponent implements OnInit {
       this.title = 'CHECKMATE';
       this.body = 'You lost.';
     }
-    if (game.status == 2 &&
+    if (game.status == Status.CHECKMATE &&
       game.status != this.lastStatus &&
-      this.myColor != 2 &&
+      this.myColor != Color.SPECTATOR &&
       this.myColor != game.turnColor) {
       // this.modal.alert()
       //   .title('CHECKMATE')
@@ -262,7 +264,7 @@ export class BoardComponent implements OnInit {
       this.promotionDialog = true;
     }
     this.lastStatus = game.status;
-    if (this.myColor == 1) {
+    if (this.myColor == Color.BLACK) {
       game.board = this.invertBoard(game.board);
     }
     this.resize();
@@ -306,10 +308,10 @@ export class BoardComponent implements OnInit {
   }
 
   playBeep() {
-    let audio = new Audio();
-    audio.src = "http://104.131.146.200/chess/chessmove.mp3";
-    audio.load();
-    audio.play();
+    // let audio = new Audio();
+    // audio.src = "http://104.131.146.200/chess/chessmove.mp3";
+    // audio.load();
+    // audio.play();
   }
 
   ngAfterViewInit() {

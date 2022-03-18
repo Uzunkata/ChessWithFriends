@@ -1,15 +1,17 @@
 package com.example.server.chess;
 
+import com.example.server.utils.Color;
+
 import java.io.Serializable;
 
 public class Player implements Serializable {
 //    private String uuid;
-    private int color;
+    private Color color;
     private String username;
 
     public Player(String username) {
 //        this.uuid = UUID.randomUUID().toString();
-        this.color = 2;//a spectator until color is set
+        this.color = Color.SPECTATOR;//a spectator until color is set
         this.username = username;
     }
 
@@ -21,11 +23,11 @@ public class Player implements Serializable {
 //        return this.uuid;
 //    }
 
-    public int getColor() {
+    public Color getColor() {
         return this.color;
     }
 
-    public void setColor(int color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 

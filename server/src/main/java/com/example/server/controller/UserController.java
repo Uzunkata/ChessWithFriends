@@ -13,7 +13,6 @@ import com.example.server.repository.UserRepository;
 import com.example.server.repository.VerifiedRepository;
 import com.example.server.security.JwtProvider;
 import com.example.server.service.EmailService;
-//import com.example.server.util.Provider;
 import com.github.tsohr.JSONObject;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -27,7 +26,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Calendar;
+
+//import com.example.server.util.Provider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -74,7 +74,6 @@ public class UserController {
         }
     }
 
-    //TODO email
     @PostMapping(value = "/register")
     public ResponseEntity<?> register(@RequestBody User user) throws MessagingException, TemplateException, IOException, UserAlreadyExists, CustomException {
         if (userRepository.findByEmail(user.getEmail()) == null && user.getId() == 0) {
@@ -121,7 +120,6 @@ public class UserController {
         if (emailVerification != null) {
             User user = emailVerification.getUser();
             LocalDateTime date = emailVerification.getDateCreated();
-            final Calendar cal = Calendar.getInstance();
 
             if(date.plusMinutes(30L).isBefore(LocalDateTime.now())){
                 verifiedRepository.delete(emailVerification);
