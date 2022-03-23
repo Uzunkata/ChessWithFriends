@@ -5,12 +5,12 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { IsNotLoggedGuard } from './guard/is-not-logged.guard';
 import { RedirectGuard } from './guard/redirect.guard';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './authentication/login/login.component';
 import { MatchHistoryComponent } from './match-history/match-history.component';
 import { MatchmakingComponent } from './matchmaking/matchmaking.component';
-import { PasswordResetComponent } from './password-reset/password-reset.component';
-import { RegisterComponent } from './register/register.component';
-import { SendPasswordResetComponent } from './send-password-reset/send-password-reset.component';
+import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { SendPasswordResetComponent } from './authentication/send-password-reset/send-password-reset.component';
 
 const routes: Routes = [
   {

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../model/User';
 import { $WebSocket } from '../web-socket/websocket.service';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AuthenticationService } from '../authentication/authentication-service/authentication.service';
 import { Status } from '../utils/Status';
 import { Color } from '../utils/Color';
 // import { Overlay, overlayConfigFactory } from 'angular2-modal';
@@ -52,7 +52,7 @@ export class BoardComponent implements OnInit {
     //overlay.defaultViewContainer = vcRef;
     this.isLogedin = authenticationService.checkLogin();
     this.token = window.localStorage.getItem("access_token");
-    this.username = authenticationService.getUsername(this.token);
+    this.username = authenticationService.getUsername();
     localStorage.setItem("myPlayerUsername", this.username);
   }
 
@@ -340,6 +340,51 @@ export class BoardComponent implements OnInit {
         this.game.board.rows[y].squares[x].border = null;
       }
     }
+  }
+
+  pieceInnerHTML(piece: any){
+    let innerHTML;
+
+    switch(piece){
+      case "whitePawn":
+        innerHTML = '<img src="assets/images/chess_peaces/whitePawn.svg.png" width="100" height="100">'
+        break;
+      case "blackPawn":
+        innerHTML = '<img src="assets/images/chess_peaces/blackPawn.svg.png" width="100" height="100">'
+        break;
+      case "whiteRook":
+        innerHTML = '<img src="assets/images/chess_peaces/whiteRook.svg.png" width="100" height="100">'
+        break;
+      case "blackRook":
+        innerHTML = '<img src="assets/images/chess_peaces/blackRook.svg.png" width="100" height="100">'
+        break;
+      case "whiteKnight":
+        innerHTML = '<img src="assets/images/chess_peaces/whiteKnight.svg.png" width="100" height="100">'
+        break;
+      case "blackKnight":
+        innerHTML = '<img src="assets/images/chess_peaces/blackKnight.svg.png" width="100" height="100">'
+        break;
+      case "whiteBishop":
+        innerHTML = '<img src="assets/images/chess_peaces/whiteBishop.svg.png" width="100" height="100">'
+        break;
+      case "blackBishop":
+        innerHTML = '<img src="assets/images/chess_peaces/blackBishop.svg.png" width="100" height="100">'
+        break;
+      case "whiteQueen":
+        innerHTML = '<img src="assets/images/chess_peaces/whiteQueen.svg.png" width="100" height="100">'
+        break;
+      case "blackQueen":
+        innerHTML = '<img src="assets/images/chess_peaces/blackQueen.svg.png" width="100" height="100">'
+        break;
+      case "whiteKing":
+        innerHTML = '<img src="assets/images/chess_peaces/whiteKing.svg.png" width="100" height="100">'
+        break;
+      case "blackKing":
+        innerHTML = '<img src="assets/images/chess_peaces/blackKing.svg.png" width="100" height="100">'
+        break;
+    }
+
+    return innerHTML;
   }
 
 }

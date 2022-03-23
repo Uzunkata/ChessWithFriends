@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AuthenticationService } from '../authentication/authentication-service/authentication.service';
 import { MatchHisory } from '../model/MatchHistory';
 import { MatchHistoryService } from './match-history.service';
 

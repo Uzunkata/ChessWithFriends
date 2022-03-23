@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AuthenticationService } from './authentication/authentication.service';
+import { AuthenticationService } from './authentication/authentication-service/authentication.service';
 
 @Component({
   selector: 'app-root',
