@@ -48,3 +48,8 @@ table.chess_table tr th.turn_square {
   margin-top: -15px;
   margin-bottom: 40px;
 }
+
+table.chess_table tr td.piece img {
+  width: 64px;
+  height: 64px;
+}

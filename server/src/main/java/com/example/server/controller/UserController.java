@@ -108,10 +108,8 @@ public class UserController {
         recipient.setSubject(subject);
         recipient.setText(bonusText);
         return  recipient;
-
     }
 
-    //TODOa
     @PostMapping(value = "/verify")
     public ResponseEntity<?> verify(@RequestParam(value = "hash") String hash) throws CustomException {
 

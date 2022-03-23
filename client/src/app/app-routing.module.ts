@@ -6,6 +6,7 @@ import { IsNotLoggedGuard } from './guard/is-not-logged.guard';
 import { RedirectGuard } from './guard/redirect.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { MatchHistoryComponent } from './match-history/match-history.component';
 import { MatchmakingComponent } from './matchmaking/matchmaking.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { RegisterComponent } from './register/register.component';
@@ -48,6 +49,11 @@ const routes: Routes = [
     path: 'matchmaking',
   component: MatchmakingComponent,
   canActivate: [RedirectGuard]
+  },
+  {
+    path: 'match-history',
+    component: MatchHistoryComponent,
+    canActivate: [RedirectGuard]
   },
   {
     path:'game/:gameUUID',

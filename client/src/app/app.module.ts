@@ -72,6 +72,7 @@ import { SendPasswordResetComponent } from './send-password-reset/send-password-
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { BoardComponent } from './board/board.component';
 import { MatchmakingComponent } from './matchmaking/matchmaking.component';
+import { MatchHistoryComponent } from './match-history/match-history.component';
 
 
 // import {AngularMaterialModule} from './angular-material/angular-material.module';
@@ -99,7 +100,8 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
     PasswordResetComponent,
     // PromotionModal,
     BoardComponent,
-    MatchmakingComponent
+    MatchmakingComponent,
+    MatchHistoryComponent
   ],
   imports: [
     BrowserModule,
