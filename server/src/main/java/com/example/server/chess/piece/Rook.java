@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Rook implements Piece, Serializable {
-    private String htmlCode;
+    private String pieceName;
     private Color color;
     private boolean moved;
 
@@ -21,9 +21,9 @@ public class Rook implements Piece, Serializable {
 
     private void initHtmlCode() {
         if (this.color == Color.WHITE) {
-            this.htmlCode = "&#9814;";
+            this.pieceName = "whiteRook";
         }else {
-            this.htmlCode = "&#9820;";
+            this.pieceName = "blackRook";
         }
     }
 

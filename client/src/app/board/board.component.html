@@ -12,7 +12,10 @@
       [style.background]="square.color"
       [style.border]="square.border"
       [ngClass]="square.piece && square.piece.color == 'WHITE' ? ['WP', 'piece'] : ['BP', 'piece']"
-      [innerHTML]="square.piece == null ? '' : square.piece.htmlCode">
+      [ngSwitch]="square.piece"
+      [innerHTML]="square.piece == null ? '' : pieceInnerHTML(square.piece.pieceName)"
+      >
+      <!-- [innerHTML]="square.piece == null ? '' : square.piece.htmlCode" -->
     </td>
   </tr>
 </table>

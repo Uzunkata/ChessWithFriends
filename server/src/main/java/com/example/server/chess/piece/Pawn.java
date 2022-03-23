@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Pawn implements Piece, Serializable {
-    private String htmlCode;
+    private String pieceName;
     private Color color;
     private boolean moved;
 
@@ -20,9 +20,9 @@ public class Pawn implements Piece, Serializable {
 
     private void initHtmlCode() {
         if (this.color == Color.WHITE) {
-            this.htmlCode = "&#9817;";
+            this.pieceName = "whitePawn";
         }else {
-            this.htmlCode = "&#9823;";
+            this.pieceName = "blackPawn";
         }
     }
 

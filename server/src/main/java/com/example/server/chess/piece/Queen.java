@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Queen implements Piece, Serializable {
-    private String htmlCode;
+    private String pieceName;
     private Color color;
     private boolean moved;
 
@@ -20,9 +20,9 @@ public class Queen implements Piece, Serializable {
 
     private void initHtmlCode() {
         if (this.color == Color.WHITE) {
-            this.htmlCode = "&#9813;";
+            this.pieceName = "whiteQueen";
         }else {
-            this.htmlCode = "&#9819;";
+            this.pieceName = "blackQueen";
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Bishop implements Piece, Serializable {
 
-    private String htmlCode;
+    private String pieceName;
     private Color color;
     private boolean moved;
 
@@ -21,10 +21,9 @@ public class Bishop implements Piece, Serializable {
 
     private void initHtmlCode() {
         if (this.color == Color.WHITE) {
-            this.htmlCode = "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1024px-Chess_blt45.svg.png'>";
-            //<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1024px-Chess_blt45.svg.png'>
+            this.pieceName = "whiteBishop";
         }else {
-            this.htmlCode = "&#9821;";
+            this.pieceName = "blackBishop";
         }
     }
 

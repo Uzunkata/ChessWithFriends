@@ -2,7 +2,8 @@
 table.chess_table {
  width:100%; min-width:8em; max-width:64em;
  margin:0 auto; padding:0;
- border-collapse: collapse; border-spacing: 0;
+ border-collapse: collapse; 
+ border-spacing: 0;
  box-sizing: border-box;
 }
 
@@ -21,10 +22,10 @@ table.chess_table tr:nth-child(odd) td:nth-child(even),
 table.chess_table tr:nth-child(even) td:nth-child(odd){
  background-color: #b58863;
 }
-table.chess_table tr td.WP { /* blancs */
+table.chess_table tr td.WP {
  color: rgb(255, 255, 255);
 }
-table.chess_table tr td.BP { /* noirs */
+table.chess_table tr td.BP {
  color: rgb(0, 0, 0);
 }
 table.chess_table tr th {
@@ -49,7 +50,7 @@ table.chess_table tr th.turn_square {
   margin-bottom: 40px;
 }
 
-table.chess_table tr td.piece img {
+.piece img {
   width: 64px;
   height: 64px;
 }
