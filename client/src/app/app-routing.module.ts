@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BoardComponent } from './board/board.component';
-import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
-import { IsNotLoggedGuard } from './guard/is-not-logged.guard';
-import { RedirectGuard } from './guard/redirect.guard';
+import { BoardComponent } from './game/board/board.component';
+import { ConfirmEmailComponent } from './authentication/confirm-email/confirm-email.component';
+import { IsNotLoggedGuard } from './authentication/guard/is-not-logged.guard';
+import { RedirectGuard } from './authentication/guard/redirect.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { MatchHistoryComponent } from './match-history/match-history.component';
-import { MatchmakingComponent } from './matchmaking/matchmaking.component';
+import { MatchmakingComponent } from './game/matchmaking/matchmaking.component';
 import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { SendPasswordResetComponent } from './authentication/send-password-reset/send-password-reset.component';

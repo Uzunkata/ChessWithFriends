@@ -65,13 +65,13 @@ import { AutoCompleteModule } from "primeng/autocomplete";
 import { ChipsModule } from "primeng/chips";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { ConfirmEmailComponent } from './authentication/confirm-email/confirm-email.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { SendPasswordResetComponent } from './authentication/send-password-reset/send-password-reset.component';
 import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
-import { BoardComponent } from './board/board.component';
-import { MatchmakingComponent } from './matchmaking/matchmaking.component';
+import { BoardComponent } from './game/board/board.component';
+import { MatchmakingComponent } from './game/matchmaking/matchmaking.component';
 import { MatchHistoryComponent } from './match-history/match-history.component';
 
 

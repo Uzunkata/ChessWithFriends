@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../model/User';
+import { User } from '../../model/User';
 import { $WebSocket } from '../web-socket/websocket.service';
-import { AuthenticationService } from '../authentication/authentication-service/authentication.service';
-import { Status } from '../utils/Status';
-import { Color } from '../utils/Color';
+import { AuthenticationService } from '../../authentication/authentication-service/authentication.service';
+import { Status } from '../../utils/Status';
+import { Color } from '../../utils/Color';
 // import { Overlay, overlayConfigFactory } from 'angular2-modal';
 // import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 // import { PromotionModalContext, PromotionModal } from '../promotion-modal';
