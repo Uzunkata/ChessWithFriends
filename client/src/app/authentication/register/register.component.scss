@@ -18,7 +18,7 @@
     max-width: 50rem;
     background: linear-gradient(
       250deg,
-      var(--secondary-light-color),
+      var(--main-dark-color),
       var(--secondary-dark-color) 80%,
     );
   }
@@ -54,7 +54,7 @@
 }
 
 .register:not([disabled]):hover{
-    background-color: var(--secondary-light-color);
+    background-color: var(--board-dark);
     color: var(--main-dark-color);
 }
 

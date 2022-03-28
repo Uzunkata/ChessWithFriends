@@ -1,16 +1,30 @@
 <p-table [columns]="cols" [value]="matches" responsiveLayout="scroll">
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns">
+            <!-- <th *ngFor="let col of columns">
                 {{col.header}}
-            </th>
+            </th> -->
+            <th class="tableNames">game hash</th>
+            <th class="tableNames">Status</th>
+            <!-- <th class="tableNames">player 1</th>
+            <th class="tableNames">player 2</th> -->
+            <!-- <th class="tableNames">Winner</th> -->
+            <th class="tableNames">Oponent</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                {{rowData[col.field]}}
-            </td>
+    <ng-template pTemplate="body" let-rowData let-match>
+        <tr >
+            <!-- <td *ngFor="let col of columns">
+                <div class="w-100">
+                    {{rowData[col.field]}}
+                </div>
+            </td> -->
+                <td [ngClass]="isGameOver(match) ? (isWon(match) ? 'won' : 'lost') : 'started' " class="gameHash" >{{match.gameHash}}</td>
+                <td [ngClass]="isGameOver(match) ? (isWon(match) ? 'won' : 'lost') : 'started' " class="gameHash" class="status">{{match.status}}</td>
+                <!-- <td>{{match.player1}}</td>
+                <td>{{match.player2}}</td> -->
+                <!-- <td [ngClass]="isGameOver(match) ? (isWon(match) ? 'won' : 'lost') : 'started' " class="gameHash" class="winner">{{match.winner}}</td> -->
+                <td [ngClass]="isGameOver(match) ? (isWon(match) ? 'won' : 'lost') : 'started' " class="gameHash">{{getOponent(match)}}</td>
         </tr>
     </ng-template>
 </p-table>

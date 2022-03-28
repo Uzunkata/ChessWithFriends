@@ -12,8 +12,8 @@ export class MatchHistoryService {
 
   constructor(private htttp: HttpClient) { }
 
-  async getAllMatchesForUser(username: string){
-    return await this.htttp.get<MatchHisory[]>(this.findAllMatchesForUserUrl+username).toPromise();
+  getAllMatchesForUser(username: string){
+    return this.htttp.get<MatchHisory[]>(this.findAllMatchesForUserUrl+username).toPromise();
   }
 
 }

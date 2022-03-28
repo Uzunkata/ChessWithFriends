@@ -12,15 +12,12 @@ export class LoginService {
  constructor(private htttp: HttpClient) {
  }
 
- async login(username: string, password: string) {
+ async login(emailOrUsername: string, password: string) {
    try {
-     var tokens = JSON.parse(await lastValueFrom(this.htttp.post(this.loginUrl, new LoginInfo(username, password), {responseType: "text"})));
+     var tokens = JSON.parse(await lastValueFrom(this.htttp.post(this.loginUrl, new LoginInfo(emailOrUsername, password), {responseType: "text"})));
    
-     // if (tokens.access_token == null) { // if bad credentials return false
-     //   return false;
-     // }
      window.localStorage.setItem("access_token", tokens.access_token)
-    //  window.localStorage.setItem("refresh_token", tokens.refresh_token)
+
      return true;
    } catch (exception) {
      return false;
@@ -30,8 +27,8 @@ export class LoginService {
 }
 
 class LoginInfo {
- constructor(email: string, password: string) {
-   this.username = email;
+ constructor(emailOrUsername: string, password: string) {
+   this.username = emailOrUsername;
    this.password = password;
  }
 

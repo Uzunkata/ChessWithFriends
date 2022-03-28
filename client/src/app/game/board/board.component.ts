@@ -96,7 +96,7 @@ export class BoardComponent implements OnInit {
     if (this.game.turnColor != this.myColor) {
       return;
     }
-    this.game.board.rows[y].squares[x].border = "5px solid lightgreen";
+    this.game.board.rows[y].squares[x].border = "3px solid white";
     let movement = { position1: { x: x, y: y }, position2: { x: null, y: null } };
     if (this.myColor == Color.BLACK) {
       movement = { position1: { x: 7 - x, y: 7 - y }, position2: { x: null, y: null } }
@@ -214,7 +214,7 @@ export class BoardComponent implements OnInit {
         movement.position2.x = 7 - movement.position2.x;
         movement.position2.y = 7 - movement.position2.y;
       }
-      this.game.board.rows[movement.position2.y].squares[movement.position2.x].border = "5px solid lightgreen";
+      this.game.board.rows[movement.position2.y].squares[movement.position2.x].border = "3px solid white";
     }
   }
 
@@ -342,49 +342,49 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  pieceInnerHTML(piece: any){
-    let innerHTML;
+  pieceSrc(piece: any){
+    let src;
 
     switch(piece){
       case "whitePawn":
-        innerHTML = '<img src="assets/images/chess_peaces/whitePawn.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/whitePawn.svg.png'
         break;
       case "blackPawn":
-        innerHTML = '<img src="assets/images/chess_peaces/blackPawn.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/blackPawn.svg.png'
         break;
       case "whiteRook":
-        innerHTML = '<img src="assets/images/chess_peaces/whiteRook.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/whiteRook.svg.png'
         break;
       case "blackRook":
-        innerHTML = '<img src="assets/images/chess_peaces/blackRook.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/blackRook.svg.png'
         break;
       case "whiteKnight":
-        innerHTML = '<img src="assets/images/chess_peaces/whiteKnight.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/whiteKnight.svg.png'
         break;
       case "blackKnight":
-        innerHTML = '<img src="assets/images/chess_peaces/blackKnight.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/blackKnight.svg.png'
         break;
       case "whiteBishop":
-        innerHTML = '<img src="assets/images/chess_peaces/whiteBishop.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/whiteBishop.svg.png'
         break;
       case "blackBishop":
-        innerHTML = '<img src="assets/images/chess_peaces/blackBishop.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/blackBishop.svg.png'
         break;
       case "whiteQueen":
-        innerHTML = '<img src="assets/images/chess_peaces/whiteQueen.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/whiteQueen.svg.png'
         break;
       case "blackQueen":
-        innerHTML = '<img src="assets/images/chess_peaces/blackQueen.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/blackQueen.svg.png'
         break;
       case "whiteKing":
-        innerHTML = '<img src="assets/images/chess_peaces/whiteKing.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/whiteKing.svg.png'
         break;
       case "blackKing":
-        innerHTML = '<img src="assets/images/chess_peaces/blackKing.svg.png" width="100" height="100">'
+        src = 'assets/images/chess_peaces/blackKing.svg.png'
         break;
     }
 
-    return innerHTML;
+    return src;
   }
 
 }

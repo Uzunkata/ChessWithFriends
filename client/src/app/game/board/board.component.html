@@ -1,7 +1,5 @@
-<br>
+<br class="board-container">
 <table class="chess_table"
-      [style.width.px]="boardSize"
-      [style.height.px]="boardSize"
       (window:resize)="resize()">
   <tr *ngFor="let row of game.board.rows; let y = index;">
     <td [style.font-size.em]="fontSize"
@@ -11,11 +9,11 @@
       (click)="click(x,y)"
       [style.background]="square.color"
       [style.border]="square.border"
-      [ngClass]="square.piece && square.piece.color == 'WHITE' ? ['WP', 'piece'] : ['BP', 'piece']"
-      [ngSwitch]="square.piece"
-      [innerHTML]="square.piece == null ? '' : pieceInnerHTML(square.piece.pieceName)"
-      >
+      [ngClass]="square.piece && square.piece.color == 'WHITE' ? 'WP piece' : 'BP piece'"
+      > 
+      <!-- [innerHTML]="square.piece == null ? '' : pieceInnerHTML(square.piece.pieceName)" -->
       <!-- [innerHTML]="square.piece == null ? '' : square.piece.htmlCode" -->
+      <img *ngIf="square.piece" [src]="pieceSrc(square.piece.pieceName)" alt="">
     </td>
   </tr>
 </table>

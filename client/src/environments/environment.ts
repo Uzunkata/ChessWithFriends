@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:4713/ochess/api',
+  loginUrl: "http://localhost:4713/ochess/login",
+
+  urlsToSkip: [
+    "user/verify",
+    "user/send-password-reset",
+    "user/register",
+    "user/reset-password-request",
+    "user/confirm-email"
+
+  ],
+
 };
 
 /*

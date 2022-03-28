@@ -1,9 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import { Interceptor } from './interceptor/interceptor'; 
-import {Observable, of, lastValueFrom } from "rxjs";
-import {count} from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Interceptor } from './interceptor/interceptor';
+import { Observable, of, lastValueFrom } from "rxjs";
+import { count } from "rxjs/operators";
 import { Router } from '@angular/router';
+import { TokensService } from '../token-service/tokens.service';
+import { UserModel } from 'src/app/model/UserModel';
 
 
 @Injectable({
@@ -11,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
+  user: UserModel;
   private loginUrl = "http://localhost:4713/ochess/login";
 
   //@ts-ignore
@@ -19,81 +22,56 @@ export class AuthenticationService {
   // isGoogle = false;
   public gameURL: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private tokenService: TokensService) {
     //@ts-ignore
 
     this.user = this.getUsername(window.localStorage.getItem("access_token"));
   }
 
-
-  async attemptLogin(username: string, password: string) { // true if login successful, false if failed
-    try {
-      var tokens = JSON.parse(await lastValueFrom(this.http.post(this.loginUrl, new LoginInfo(username, password),  {responseType: "text"})));
-      window.localStorage.setItem("access_token", tokens.access_token)
-
-      this.router.navigateByUrl('/home');
-      this.user = this.getUsername();
-      //this.accessToken = tokens.access_token;
-
-      window.location.reload();
-      return 200;
-    } catch (exception) {
-      return exception;
-    }
-
-  }
-
-  getUsername(){
-
-    let token = window.localStorage.getItem("access_token");
-    if(!this.checkLogin()){
-      return null;
-    }
-
-    if(token == null){
-      return null;
-    }
-
-    // var x = JSON.parse(atob(token.split('.')[1]));
-    // console.log(x);
-    let payloadEncoded = token.split('.')[1];
-    let payloadDecoded = atob(payloadEncoded);
-    let payload = JSON.parse(payloadDecoded);
-    // let username = JSON.parse(payload.sub);
-    return payload.sub;
-  }
-
   checkLogin() {
 
-    let token = window.localStorage.getItem("access_token");
+    let token = this.tokenService.getAccessToken();
 
-    if (!token){ 
+    if (!token) return false;
+    try {
+
+      let payloadEncoded = token.split('.')[1];
+      let payloadDecoded = atob(payloadEncoded);
+
+      if (!payloadDecoded) return false;
+      let payload = JSON.parse(payloadDecoded);
+      let expDate = new Date(payload.exp * 1000);
+      let accessIsExpired = !(expDate > new Date());
+
+      if (accessIsExpired) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
       return false;
     }
-    let payloadEncoded = token.split('.')[1];
-    let payloadDecoded = atob(payloadEncoded);
+  }
 
-    if (!payloadDecoded) {
-      return false;
+  getUsername() {
+    let jwt = this.tokenService.getAccessToken();
+    if (jwt == null) {
+      return "-"
     }
+    let jwtData = jwt.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData)
+    console.log(decodedJwtData.sub)
+    return decodedJwtData.sub.toString()
+  }
 
-    let payload = JSON.parse(payloadDecoded);
-    let expDate = new Date(payload.exp * 1000);
-
-    if(expDate > new Date()){
+  isTokenExpired(token: string | null): boolean {
+    if (!token || token === "undefined") return true;
+    try {
+      // @ts-ignore
+      return this.tokenService.tokenExpired(token)
+    } catch (exception) {
       return true;
-    }else{
-      return false;
     }
   }
-
-}
-
-class LoginInfo {
-  constructor(username: string, password: string) {
-    this.username = username;
-    this.password = password;
-  }
-  username: string;
-  password: string;
 }

@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.dto.MatchHistoryDto;
 import com.example.server.model.MatchHistory;
 import com.example.server.model.User;
 import com.example.server.repository.MatchHistoryRepository;
@@ -22,12 +23,6 @@ public class MatchHistoryController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(value="/findAll")
-    public ResponseEntity<?>findAll(){
-        List<MatchHistory> matchHistoryList = matchHistoryRepository.findAll();
-        return ResponseEntity.ok().body(matchHistoryList);
-    }
-
     @GetMapping(value="/findAllForUser")
     public ResponseEntity<?>findAllForUser(@RequestParam (value = "username") String username){
         User user = userRepository.findByUsername(username);
@@ -36,8 +31,33 @@ public class MatchHistoryController {
         List<MatchHistory> matchHistoryList = new ArrayList<>();
         matchHistoryList.addAll(matchHistoryListPlayer1);
         matchHistoryList.addAll(matchHistoryListPlayer2);
-        return ResponseEntity.ok().body(matchHistoryList);
-    }
 
+        List<MatchHistoryDto> matchHistoryDtoList = new ArrayList<>();
+
+        for(MatchHistory matchHistory: matchHistoryList){
+            MatchHistoryDto matchHistoryDto = new MatchHistoryDto();
+            MatchHistory matchHistoryTemp = matchHistoryRepository.findByGameHash(matchHistory.getGameHash());
+
+            matchHistoryDto.setGameHash(matchHistoryTemp.getGameHash());
+            matchHistoryDto.setPlayer1(matchHistoryTemp.getPlayer1().getUsername());
+
+            if(matchHistoryTemp.getPlayer2() != null) {
+                matchHistoryDto.setPlayer2(matchHistoryTemp.getPlayer2().getUsername());
+            }else {
+                matchHistoryDto.setPlayer2("");
+            }
+            matchHistoryDto.setStatus(matchHistoryTemp.getStatus());
+
+            if(matchHistoryTemp.getWinner() != null) {
+                matchHistoryDto.setWinner(matchHistoryTemp.getWinner().getUsername());
+            }else {
+                matchHistoryDto.setWinner("");
+            }
+
+            matchHistoryDtoList.add(matchHistoryDto);
+        }
+
+        return ResponseEntity.ok().body(matchHistoryDtoList);
+    }
 
 }

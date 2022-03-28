@@ -5,7 +5,7 @@
     <div class="p-field p-grid">
       <label for="email" class="p-col-fixed" >Email or Username</label>
       <div class="p-col">
-        <input class="filed" [(ngModel)]="email" id="email" type="text" pInputText>
+        <input class="filed" [(ngModel)]="emailOrUsername" id="email" type="text" pInputText>
       </div>
     </div>
     <br>
@@ -28,12 +28,12 @@
             class="p-button-raised p-button center loginlbtn">Log in</button>
     </div>
 
-    <div class="flex">
+    <!-- <div class="flex">
       <button class="btn-block google-sign-in googlebtn" (click)="googleLogin()" mat-raised-button>
         <img [src]="'assets/images/google.svg'" alt="google"/>
         <span> Continue with Google</span>
       </button>
-    </div>
+    </div> -->
 
     <button class="forgottenPasswordButton center" (click)="forgotPassword()" >Forgot your password?</button>
 

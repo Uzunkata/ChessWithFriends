@@ -1,6 +1,9 @@
 // * {margin:0; padding:0; }
 table.chess_table {
- width:100%; min-width:8em; max-width:64em;
+ width:40em;
+ height: 40em;
+  // width: 80%;
+  // height: 80%;
  margin:0 auto; padding:0;
  border-collapse: collapse; 
  border-spacing: 0;
@@ -11,7 +14,18 @@ table.chess_table tr td {
  margin:0; padding:0;
  font-size: 1em; font-family: serif; text-align: center;
  cursor: pointer;
- height: 10%;
+//  height: 10%;
+//  width: 10%;
+  height: 4vw;
+  width: 4vw;
+  
+  img {
+    // height: 64px;
+    // width: 64px;
+    height: 4ex;
+    width: 4ex;
+    resize: none;
+  }
 }
 
 table.chess_table tr:nth-child(odd) td:nth-child(odd),
@@ -50,7 +64,7 @@ table.chess_table tr th.turn_square {
   margin-bottom: 40px;
 }
 
-.piece img {
-  width: 64px;
-  height: 64px;
+.board-container{
+  width: 60%;
+  height: 60%;
 }

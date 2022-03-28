@@ -73,6 +73,7 @@ import { PasswordResetComponent } from './authentication/password-reset/password
 import { BoardComponent } from './game/board/board.component';
 import { MatchmakingComponent } from './game/matchmaking/matchmaking.component';
 import { MatchHistoryComponent } from './match-history/match-history.component';
+import { Interceptor } from './authentication/authentication-service/interceptor/interceptor';
 
 
 // import {AngularMaterialModule} from './angular-material/angular-material.module';
@@ -178,7 +179,8 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
       } as SocialAuthServiceConfig
     },
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   // entryComponents: [PromotionModal]

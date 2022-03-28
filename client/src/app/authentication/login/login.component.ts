@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
+import { LoginService } from './login.service';
 
 
 
@@ -16,15 +17,17 @@ import { AuthenticationService } from '../authentication-service/authentication.
 })
 export class LoginComponent implements OnInit {
 
-  email: string = "";
+  emailOrUsername: string = "";
   password: string = "";
 
   signin: FormGroup = new FormGroup({
   });
 
   hide = true;
-  constructor(private router: Router, private messageService: MessageService,
-        private authService: SocialAuthService, private authenticationService: AuthenticationService) {
+  constructor(private router: Router,
+        private authService: SocialAuthService,
+        private loginService: LoginService,
+        private authenticationService: AuthenticationService) {
 
           if(authenticationService.checkLogin()){
             router.navigateByUrl('/home');
@@ -42,22 +45,13 @@ export class LoginComponent implements OnInit {
   }
 
   async attemptLogin() {
-
     try {
-
-      var request = await this.authenticationService.attemptLogin(this.email, this.password);
-  
-      //  window.location.replace('/home');
-  
-      }catch (e) {
-        console.log(e)
-        this.messageService.add({
-                severity: 'error',
-                summary: "Invalid email/username or password",
-                detail: '',
-              });
-  
-      }
+      await this.loginService.login(this.emailOrUsername, this.password)
+      window.location.reload();
+      this.router.navigate(['home'])
+    } catch (Exception) {
+      console.log(Exception)
+    }
   }
 
   register() {

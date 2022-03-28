@@ -45,7 +45,7 @@ input:-webkit-autofill:active{
   max-width: 50rem;
   background: linear-gradient(
     250deg,
-    var(--secondary-light-color),
+    var(--main-dark-color),
     var(--secondary-dark-color) 80%,
   );
 }
@@ -92,15 +92,15 @@ form {
 
   .register{
     width: 30%;
-    background-color: var(--main-light-color);
+    background-color: var(--board-light);
     margin-bottom: 5%;
     margin-right: 20%;
     color : var(--main-dark-color);
 }
 
 .register:not([disabled]):hover{
-    background-color: var(--secondary-light-color);
-    color: var(--main-dark-color);
+    background-color: var(--board-dark);
+    color: var(--board-light);
 }
 
 .register[disabled]{
@@ -109,15 +109,15 @@ form {
 }
   
 .loginlbtn {
-    color : var(--main-light-color);
-    background-color: var(--secondary-dark-color);
+    color : var(--board-light);
+    background-color: var(--board-dark);
     width: 30%;
     margin-bottom: 5%;
     margin-left: 20%;
   }
   
   .loginlbtn:not([disabled]):hover {
-    background-color: var(--main-light-color);
+    background-color: var(--board-light);
     color: var(--main-dark-color);
   }
   

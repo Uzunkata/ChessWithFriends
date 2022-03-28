@@ -26,6 +26,15 @@ export class AppComponent {
     this.router.navigate(['/register']).catch(console.error);
   }
 
+  matchHistory(){
+    this.router.navigate(['/match-history']).catch(console.error);
+  }
+
+  matchmaking(){
+    this.router.navigate(['/matchmaking']).catch(console.error);
+
+  }
+
   logout() {
     window.localStorage.removeItem("access_token");
     // window.localStorage.removeItem("refresh_token");
