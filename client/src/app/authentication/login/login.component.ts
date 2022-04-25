@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService) {
 
           if(authenticationService.checkLogin()){
-            router.navigateByUrl('/home');
+            router.navigateByUrl('/matchmaking');
           }
   }
 
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     try {
       await this.loginService.login(this.emailOrUsername, this.password)
       window.location.reload();
-      this.router.navigate(['home'])
+      this.router.navigate(['matchmaking'])
     } catch (Exception) {
       console.log(Exception)
     }

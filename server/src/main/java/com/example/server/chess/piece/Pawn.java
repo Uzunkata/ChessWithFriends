@@ -15,10 +15,10 @@ public class Pawn implements Piece, Serializable {
 
     public Pawn(Color color) {
         this.color = color;
-        this.initHtmlCode();
+        this.initName();
     }
 
-    private void initHtmlCode() {
+    private void initName() {
         if (this.color == Color.WHITE) {
             this.pieceName = "whitePawn";
         }else {

@@ -5,6 +5,7 @@ import { $WebSocket } from '../web-socket/websocket.service';
 import { AuthenticationService } from '../../authentication/authentication-service/authentication.service';
 import { Status } from '../../utils/Status';
 import { Color } from '../../utils/Color';
+import { Clipboard } from '@angular/cdk/clipboard';
 // import { Overlay, overlayConfigFactory } from 'angular2-modal';
 // import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 // import { PromotionModalContext, PromotionModal } from '../promotion-modal';
@@ -25,7 +26,7 @@ export class BoardComponent implements OnInit {
   private sub: any;
   private movement: Movement;
   private myColor: Color;
-  private user: User = {} as User;
+  // private user: User = {} as User;
   // private myPlayerUUID: string = '';
   private lastStatus: number;
   game: any;
@@ -42,18 +43,22 @@ export class BoardComponent implements OnInit {
   body: string;
   pieceToPromote: any;
 
+  gameOver: boolean;
+  won: boolean;
+
   constructor(private route: ActivatedRoute, private router: Router,
       //overlay: Overlay,
       vcRef: ViewContainerRef,
       //public modal: Modal
-      authenticationService: AuthenticationService
+      authenticationService: AuthenticationService,
+      private clipboard: Clipboard
       ) {
     this.movement = { position1: { x: null, y: null }, position2: { x: null, y: null } };
     //overlay.defaultViewContainer = vcRef;
     this.isLogedin = authenticationService.checkLogin();
     this.token = window.localStorage.getItem("access_token");
     this.username = authenticationService.getUsername();
-    localStorage.setItem("myPlayerUsername", this.username);
+    // localStorage.setItem("myPlayerUsername", this.username);
   }
 
   ngOnInit() {
@@ -66,17 +71,21 @@ export class BoardComponent implements OnInit {
       // if (localStorage.getItem("myPlayerUUID" + params["gameUUID"])) {
       //   // this.myPlayerUUID = localStorage.getItem("myPlayerUUID" + params["gameUUID"]) || '';
       // }
-      if(!localStorage.getItem("gameUUID")){
-        localStorage.setItem("gameUUID", this.gameUUID);
-      }
-      if (localStorage.getItem("myPlayerUsername")) {
-      this.username = localStorage.getItem("myPlayerUsername") || "";
-      }
+      // if(!localStorage.getItem("gameUUID")){
+      //   localStorage.setItem("gameUUID", this.gameUUID);
+      // }
+      // if (localStorage.getItem("myPlayerUsername")) {
+      // this.username = localStorage.getItem("myPlayerUsername") || "";
+      // }
       this.ws = new $WebSocket();
       this.subscribeToWebSocket();
       this.requestJoinGame();
       this.requestUpdate();
     });
+  }
+
+  coppyLink(){
+    this.clipboard.copy("http://localhost:4200/"+this.router.url);
   }
 
   click(x: any, y: any) {
@@ -189,7 +198,7 @@ export class BoardComponent implements OnInit {
       this.myColor = player.color;
       this.username = player.username;
       // localStorage.setItem("myPlayerUUID" + this.gameUUID, player.uuid);
-      localStorage.setItem("myPlayerUsername", this.username);
+      // localStorage.setItem("myPlayerUsername", this.username);
     }
   }
 
@@ -242,6 +251,8 @@ export class BoardComponent implements OnInit {
       this.alertDialog = true;
       this.title = 'CHECKMATE';
       this.body = 'You lost.';
+      this.gameOver = true;
+      this.won = false;
     }
     if (game.status == Status.CHECKMATE &&
       game.status != this.lastStatus &&
@@ -254,6 +265,8 @@ export class BoardComponent implements OnInit {
       this.alertDialog = true;
       this.title = 'CHECKMATE';
       this.body = 'You won.';
+      this.gameOver = true;
+      this.won = true;
     }
     if (game.isPromotion && game.turnColor == this.myColor) {
       // this.modal.open(PromotionModal, overlayConfigFactory({ num1: 2, num2: 3 }, BSModalContext))

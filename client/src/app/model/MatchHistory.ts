@@ -6,4 +6,5 @@ export interface MatchHisory{
     player2: string;
     status: Status;
     winner: string;
+    dateCreated: Date;
 }

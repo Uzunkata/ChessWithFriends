@@ -6,6 +6,7 @@ import com.example.server.model.User;
 import com.example.server.repository.MatchHistoryRepository;
 import com.example.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +27,12 @@ public class MatchHistoryController {
     @GetMapping(value="/findAllForUser")
     public ResponseEntity<?>findAllForUser(@RequestParam (value = "username") String username){
         User user = userRepository.findByUsername(username);
-        List<MatchHistory> matchHistoryListPlayer1 = matchHistoryRepository.findByPlayer1(user);
-        List<MatchHistory> matchHistoryListPlayer2 = matchHistoryRepository.findByPlayer2(user);
-        List<MatchHistory> matchHistoryList = new ArrayList<>();
-        matchHistoryList.addAll(matchHistoryListPlayer1);
-        matchHistoryList.addAll(matchHistoryListPlayer2);
+//        List<MatchHistory> matchHistoryListPlayer1 = matchHistoryRepository.findByPlayer1(user);
+//        List<MatchHistory> matchHistoryListPlayer2 = matchHistoryRepository.findByPlayer2(user);
+//        List<MatchHistory> matchHistoryList = new ArrayList<>();
+//        matchHistoryList.addAll(matchHistoryListPlayer1);
+//        matchHistoryList.addAll(matchHistoryListPlayer2);
+        List <MatchHistory> matchHistoryList = matchHistoryRepository.findAllByPlayer1OrPlayer2(user, user, Sort.by(Sort.Direction.DESC, "dateCreated"));
 
         List<MatchHistoryDto> matchHistoryDtoList = new ArrayList<>();
 
@@ -40,6 +42,7 @@ public class MatchHistoryController {
 
             matchHistoryDto.setGameHash(matchHistoryTemp.getGameHash());
             matchHistoryDto.setPlayer1(matchHistoryTemp.getPlayer1().getUsername());
+            matchHistoryDto.setDateCreated(matchHistoryTemp.getDateCreated());
 
             if(matchHistoryTemp.getPlayer2() != null) {
                 matchHistoryDto.setPlayer2(matchHistoryTemp.getPlayer2().getUsername());

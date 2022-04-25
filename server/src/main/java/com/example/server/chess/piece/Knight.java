@@ -15,10 +15,10 @@ public class Knight implements Piece, Serializable {
 
     public Knight(Color color) {
         this.color = color;
-        this.initHtmlCode();
+        this.initName();
     }
 
-    private void initHtmlCode() {
+    private void initName() {
         if (this.color == Color.WHITE) {
             this.pieceName = "whiteKnight";
         }else {

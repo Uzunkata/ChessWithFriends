@@ -1,5 +1,6 @@
-package com.example.server.websocket;
+package com.example.server.service;
 
+import com.example.server.chess.websocket.GameHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -7,7 +7,7 @@ import {lastValueFrom} from "rxjs";
 })
 export class LoginService {
 
-  loginUrl = "http://localhost:4713/ochess/login";
+  loginUrl = "http://localhost:1440/ochess/login";
 
  constructor(private htttp: HttpClient) {
  }

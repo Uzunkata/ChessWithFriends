@@ -1,7 +1,7 @@
 <div class="backround">
   <mat-toolbar color="black" style="width: 100%;">
 
-    <span class="logodiv">
+    <span class="logo">
       <img src="assets/images/chess.png" width="50" height="70" (click)="matchmaking()" style="cursor: pointer;">
       <span class="logoname" (click)="matchmaking()"> Play Chess with friends</span>
       <button *ngIf="isLogedin" (click)="matchHistory()" pButton type="button"
@@ -20,6 +20,9 @@
 
       <button *ngIf="isLogedin" (click)="logout()" pButton type="button"
         class="p-button-raised p-button center logoutlbtn">Logout</button>
+
+      <span *ngIf="isLogedin" class="username">{{username}}</span>
+
     </div>
     <span class="example-spacer"></span>
   </mat-toolbar>

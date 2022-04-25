@@ -98,6 +98,7 @@ public class Game implements Serializable {
         this.updateStatus();
     }
 
+    //find the the promotion of the pawn
     public Piece getNewPieceByName(String name, Color color) {
         if (name.equals("Queen")) {
             return new Queen(color);

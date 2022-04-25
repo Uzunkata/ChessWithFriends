@@ -26,7 +26,7 @@ export class MatchmakingComponent implements OnInit {
 
   sendNewMatchRequest() {
     let uuid = uuidv4();
-    localStorage.setItem('gameUUID', uuid);
+    // localStorage.setItem('gameUUID', uuid);
     // localStorage.setItem('myPlayerNumber', '0');
     let message:Message = {
       action: 'newGame',

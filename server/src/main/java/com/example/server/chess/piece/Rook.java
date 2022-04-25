@@ -16,10 +16,10 @@ public class Rook implements Piece, Serializable {
     public Rook(Color color) {
         this.color = color;
         //this.htmlCode = "&#9820;";
-        this.initHtmlCode();
+        this.initName();
     }
 
-    private void initHtmlCode() {
+    private void initName() {
         if (this.color == Color.WHITE) {
             this.pieceName = "whiteRook";
         }else {

@@ -1,6 +1,6 @@
-package com.example.server.websocket;
+package com.example.server.controller;
 
-import com.example.server.Storage;
+import com.example.server.chess.Storage;
 import com.example.server.chess.Game;
 import com.example.server.chess.Movement;
 import com.example.server.chess.Player;
@@ -97,7 +97,6 @@ public class GameController {
 //        User winnerUser = userRepository.findByUsername(game.getWinner().getUsername());
 //        if(winnerUser!= null)
 //            matchHistory.setWinner(winnerUser);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   " + game.getWinner());
         matchHistory.setWinner(userRepository.findByUsername(game.getWinner()));
 
         matchHistoryRepository.save(matchHistory);

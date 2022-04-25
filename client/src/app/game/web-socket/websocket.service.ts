@@ -29,8 +29,8 @@ export class $WebSocket  {
 
   constructor(private protocols?:Array<string>) {
     if (isDevMode()) {
-      this.url = "ws://localhost:4713/ochess/game";
-      //ws://localhost:4713/ochess/game
+      this.url = "ws://localhost:1440/ochess/game";
+      //ws://localhost:1440/ochess/game
       //ws://localhost:8088/game
     }else {
       this.url = "ws://104.131.146.200:8088/game";

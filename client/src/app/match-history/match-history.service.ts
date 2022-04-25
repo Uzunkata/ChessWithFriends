@@ -7,7 +7,7 @@ import { MatchHisory } from '../model/MatchHistory';
 })
 export class MatchHistoryService {
 
-  matchHistoryUrl = "http://localhost:4713/ochess/api/match-history";
+  matchHistoryUrl = "http://localhost:1440/ochess/api/match-history";
   findAllMatchesForUserUrl = this.matchHistoryUrl + "/findAllForUser/?username=";
 
   constructor(private htttp: HttpClient) { }

@@ -8,7 +8,7 @@ import {lastValueFrom} from "rxjs";
   providedIn: 'root'
 })
 export class ConfirmEmailService {
-  verifcationUrl = "http://localhost:4713/ochess/api/user/verify"
+  verifcationUrl = "http://localhost:1440/ochess/api/user/verify"
 
   constructor(private http: HttpClient) {
   }

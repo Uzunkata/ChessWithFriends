@@ -11,16 +11,12 @@
   }
 
 .registerFields {
-    margin: auto;
-    width: 50%;
-    padding: 10em;
-    border-radius: 25px;
-    max-width: 50rem;
-    background: linear-gradient(
-      250deg,
-      var(--main-dark-color),
-      var(--secondary-dark-color) 80%,
-    );
+  margin: auto;
+  width: 1000px;
+  padding: 10em;
+  border-radius: 25px;
+  max-width: 50rem;
+  background: linear-gradient(250deg, var(--main-dark-color), var(--secondary-dark-color) 80%);
   }
 
   .flex {
@@ -46,7 +42,7 @@
   }
 
   .register{
-    width: 30%;
+    width: 100px;
     background-color: var(--main-light-color);
     margin-bottom: 5%;
     // margin-left: 35%;

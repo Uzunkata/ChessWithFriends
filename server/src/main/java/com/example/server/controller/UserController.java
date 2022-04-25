@@ -68,8 +68,6 @@ public class UserController {
         if (existUser == null) {
             User newUser = new User();
             newUser.setUsername(email);
-//            newUser.setProvider(Provider.GOOGLE);
-
             userRepository.save(newUser);
         }
     }
@@ -85,8 +83,8 @@ public class UserController {
             String hash = jwtProvider.generateEmailVerificationHash();
             saveEmailVerification(hash, user);
 
-            RecipientConfirmation recepient = getRecipient(hash, user.getEmail(), "Confirm your email at VWP", "bonus text!");
-            emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
+            RecipientConfirmation recipient = getRecipient(hash, user.getEmail(), "Confirm your email at VWP", "bonus text!");
+            emailService.sendConfirmationMail(recipient, emailVerificationTemplate);
 
             return ResponseEntity.ok("user has been created");
         } else {
@@ -144,7 +142,7 @@ public class UserController {
 
             savePasswordReset(hash, user);//saves password reset hash with the user's id in the db
 
-            RecipientConfirmation recipient = getRecipient(hash, user.getEmail(), "Reset your password at VWP", "bonus text");
+            RecipientConfirmation recipient = getRecipient(hash, user.getEmail(), "Reset your password at Chess with friends", "bonus text");
 
             emailService.sendConfirmationMail(recipient, passwordResetTemplate);
 
@@ -167,7 +165,6 @@ public class UserController {
         passwordResetRepository.save(passwordReset);
     }
 
-    //TODO
     @PostMapping(value = "/reset-password-request")
     public ResponseEntity<?> passwordReset(@RequestBody PasswordRequestModel passwordRequestModel) {
         String hash = passwordRequestModel.getHash();
@@ -191,12 +188,5 @@ public class UserController {
             return ResponseEntity.ok("hash not valid or expired");
         }
     }
-
-    //TODO
-//    @GetMapping(value = "/user/info")
-//    public ResponseEntity getUserInfo(Principal principal){
-//        principal.getName();
-//        return userRepository.findByEmail(principal.getName());
-//    }
 }
 

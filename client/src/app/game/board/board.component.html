@@ -1,51 +1,69 @@
-<br class="board-container">
-<table class="chess_table"
-      (window:resize)="resize()">
-  <tr *ngFor="let row of game.board.rows; let y = index;">
-    <td [style.font-size.em]="fontSize"
-      *ngFor="let square of row.squares; let x = index;"
-      [style.width.px]="squareSize"
-      [style.height.px]="squareSize"
-      (click)="click(x,y)"
-      [style.background]="square.color"
-      [style.border]="square.border"
-      [ngClass]="square.piece && square.piece.color == 'WHITE' ? 'WP piece' : 'BP piece'"
-      > 
-      <!-- [innerHTML]="square.piece == null ? '' : pieceInnerHTML(square.piece.pieceName)" -->
-      <!-- [innerHTML]="square.piece == null ? '' : square.piece.htmlCode" -->
-      <img *ngIf="square.piece" [src]="pieceSrc(square.piece.pieceName)" alt="">
-    </td>
-  </tr>
-</table>
+<br class="page-container">
 
-<p-dialog header="Promotion" [(visible)]="promotionDialog" [position]="promotionDialogPosition" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="false">
-    <ng-template pTemplate="header">
-      <div class="container-fluid custom-modal-container">
-        <div class="row custom-modal-header">
-            <div class="col-sm-12">
-                <h1>Promotion - Pick one</h1>
-            </div>
+<div class="anaunceText anaunceTextWon center" *ngIf="gameOver && won">You Won</div>
+<div class="anaunceText anaunceTextLost center" *ngIf="gameOver && !won">You Lost</div>
+
+
+<div class="board-container">
+
+  <
+
+  <div class="copyLink">
+    <p>Just click the button and share the link with whoever you want to play with.</p>
+    <p>If more people open the link they will be able to watch the match.<p>
+    <button (click)="coppyLink()" pButton type="button" class="p-button-raised p-button coppybtn">
+      Coppy gamelink</button>
+  </div>
+
+  <table class="chess_table" (window:resize)="resize()">
+    <tr *ngFor="let row of game.board.rows; let y = index;">
+      <td [style.font-size.em]="fontSize" *ngFor="let square of row.squares; let x = index;"
+      [style.border]="square.border"
+      [style.width.px]="squareSize" [style.height.px]="squareSize"
+      (click)="click(x,y)"
+      >
+      <!-- [ngClass]="square.piece && square.piece.color == 'WHITE' ? 'WP piece' : 'BP piece'" -->
+      <!-- [innerHTML]="square.piece == null ? '' : pieceInnerHTML(square.piece.pieceName)" -->
+        <!-- [innerHTML]="square.piece == null ? '' : square.piece.htmlCode" -->
+        <img *ngIf="square.piece" [src]="pieceSrc(square.piece.pieceName)" alt="">
+      </td>
+    </tr>
+  </table>
+
+  <div class="copyLink2">
+    <p class="opponent" *ngIf="game.player2">Opponent: {{game.player1.username == username ? game.player2.username : game.player1.username}}</p>
+  </div>
+</div>
+
+<p-dialog header="Promotion" [(visible)]="promotionDialog" [position]="promotionDialogPosition" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="header">
+    <div class="container-fluid custom-modal-container">
+      <div class="row custom-modal-header">
+        <div class="col-sm-12">
+          <h1>Promotion - Pick one</h1>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-               <div class="jumbotron">
-                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Queen')">&#9819;</span>&nbsp;&nbsp;&nbsp;
-                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Knight')">&#9822;</span>&nbsp;&nbsp;&nbsp;
-                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Rook')">&#9820;</span>&nbsp;&nbsp;&nbsp;
-                  <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Bishop')">&#9821;</span>
-                </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="jumbotron">
+            <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Queen')">&#9819;</span>&nbsp;&nbsp;&nbsp;
+            <span style="cursor: pointer; font-size: 6em;"
+              (click)="pickPiece('Knight')">&#9822;</span>&nbsp;&nbsp;&nbsp;
+            <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Rook')">&#9820;</span>&nbsp;&nbsp;&nbsp;
+            <span style="cursor: pointer; font-size: 6em;" (click)="pickPiece('Bishop')">&#9821;</span>
           </div>
-       </div>
+        </div>
+      </div>
     </div>
-  </ng-template> 
+  </ng-template>
 </p-dialog>
 
-<p-dialog [header]="this.title" [(visible)]="alertDialog" [position]="promotionDialogPosition" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="false">
-    <p>{{this.body}}</p>
-    
-    <ng-template pTemplate="footer">
-        <p-button (click)="alertDialog=false" label="Ok" class="p-button-text"></p-button>
-    </ng-template> 
+<p-dialog [header]="this.title" [(visible)]="alertDialog" [position]="promotionDialogPosition" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <p class="alert center ">{{this.body}}</p>
+
+  <ng-template pTemplate="footer">
+    <p-button (click)="alertDialog=false" label="Ok" class="p-button-text"></p-button>
+  </ng-template>
 </p-dialog>

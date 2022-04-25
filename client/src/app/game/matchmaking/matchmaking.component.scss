@@ -1,15 +1,15 @@
-.form {
-	width: 380px;
-	margin: 4em auto;
-	padding: 3em 2em 2em 2em;
-	background: #fafafa;
-	border: 1px solid #ebebeb;
-	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
-	text-align: center;
-}
+// .form {
+// 	width: 380px;
+// 	margin: 4em auto;
+// 	padding: 3em 2em 2em 2em;
+// 	background: #fafafa;
+// 	border: 1px solid #ebebeb;
+// 	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+// 	text-align: center;
+// }
 
 .full-width {
-  width: 100%;
+	width: 100%;
 }
 
 .backround {
@@ -24,4 +24,41 @@
 	// background-position: center;
 	// background-repeat: no-repeat;
 	// background-size: cover;
-  }
+}
+
+.matchmaking-fields {
+	margin: auto;
+	width: 1000px;
+	padding: 10em;
+	border-radius: 25px;
+	max-width: 50rem;
+	background: linear-gradient(250deg, var(--main-dark-color), var(--secondary-dark-color) 80%);
+}
+
+p {
+	color: var(--board-light);
+	font-size: 30px;
+}
+
+.center {
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	display: inline;
+}
+
+.playbtn {
+	margin-left: 30%;
+	margin-top: 10%;
+	width: 150px;
+	height: 70px;
+	font-size: 35px;
+	background-color: var(--board-light);
+	color: var(--main-dark-color);
+}
+
+.playbtn:not([disabled]):hover {
+	background-color: var(--board-dark);
+	color: var(--board-light);
+}

@@ -4,7 +4,6 @@ import { BoardComponent } from './game/board/board.component';
 import { ConfirmEmailComponent } from './authentication/confirm-email/confirm-email.component';
 import { IsNotLoggedGuard } from './authentication/guard/is-not-logged.guard';
 import { RedirectGuard } from './authentication/guard/redirect.guard';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { MatchHistoryComponent } from './match-history/match-history.component';
 import { MatchmakingComponent } from './game/matchmaking/matchmaking.component';
@@ -14,11 +13,6 @@ import { SendPasswordResetComponent } from './authentication/send-password-reset
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
   path: 'login',
   component: LoginComponent,
   canActivate: [IsNotLoggedGuard]
@@ -27,11 +21,6 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
       canActivate: [IsNotLoggedGuard]
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [RedirectGuard]
   },
   {
     path: 'confirm-email',
@@ -59,7 +48,12 @@ const routes: Routes = [
     path:'game/:gameUUID',
     component: BoardComponent,
     canActivate: [RedirectGuard]
-  }
+  },
+  {
+    path: '',
+    redirectTo: 'matchmaking',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

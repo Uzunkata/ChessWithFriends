@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     this.username = ""
 
     if(authenticationService.checkLogin()){
-      router.navigateByUrl("/home");
+      router.navigateByUrl("/matchmaking");
     }
 
   }
@@ -33,12 +33,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  doRegister() {
+  async doRegister() {
     if (this.password == this.passwordConfirm) {
       this.user.password = this.password;
       this.user.email = this.email;
       this.user.username = this.username;
-      this.registerService.register(this.user)
+      await this.registerService.register(this.user)
       this.password=""
       this.passwordConfirm=""
       this.email=""

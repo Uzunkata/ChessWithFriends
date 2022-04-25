@@ -11,5 +11,4 @@ public interface Piece {
     Direction[] getDirections(Board board, Position position);
     boolean hasMoved();
     void setMoved(boolean moved);
-
 }

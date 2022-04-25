@@ -1,4 +1,4 @@
-package com.example.server.websocket;
+package com.example.server.chess.websocket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

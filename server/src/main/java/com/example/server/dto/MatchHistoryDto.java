@@ -2,6 +2,8 @@ package com.example.server.dto;
 
 import com.example.server.utils.Status;
 
+import java.time.LocalDateTime;
+
 public class MatchHistoryDto {
 
     private String gameHash;
@@ -9,6 +11,7 @@ public class MatchHistoryDto {
     private String player2;
     private Status status;
     private String winner;
+    private LocalDateTime dateCreated;
 
     public String getGameHash() {
         return gameHash;
@@ -48,5 +51,13 @@ public class MatchHistoryDto {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

@@ -1,49 +1,66 @@
 // * {margin:0; padding:0; }
+
+.center {
+  // margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 table.chess_table {
- width:40em;
- height: 40em;
+
+  justify-self: center;
+  width: 40em;
+  height: 40em;
   // width: 80%;
   // height: 80%;
- margin:0 auto; padding:0;
- border-collapse: collapse; 
- border-spacing: 0;
- box-sizing: border-box;
+  margin: 0 auto;
+  margin-right: auto;
+  align-items: center;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-sizing: border-box;
 }
 
 table.chess_table tr td {
- margin:0; padding:0;
- font-size: 1em; font-family: serif; text-align: center;
- cursor: pointer;
-//  height: 10%;
-//  width: 10%;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-family: serif;
+  text-align: center;
+  cursor: pointer;
+  //  height: 10%;
+  //  width: 10%;
   height: 4vw;
   width: 4vw;
-  
+
   img {
     // height: 64px;
     // width: 64px;
-    height: 4ex;
-    width: 4ex;
+    height: 3.3ex;
+    width: 3.3ex;
     resize: none;
   }
 }
 
 table.chess_table tr:nth-child(odd) td:nth-child(odd),
-table.chess_table tr:nth-child(even) td:nth-child(even){
- background-color: #f0d9b5;
+table.chess_table tr:nth-child(even) td:nth-child(even) {
+  background-color: #f0d9b5;
 }
 table.chess_table tr:nth-child(odd) td:nth-child(even),
-table.chess_table tr:nth-child(even) td:nth-child(odd){
- background-color: #b58863;
+table.chess_table tr:nth-child(even) td:nth-child(odd) {
+  background-color: #b58863;
 }
 table.chess_table tr td.WP {
- color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 table.chess_table tr td.BP {
- color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
 table.chess_table tr th {
- color: black; font-size:1em;
+  color: black;
+  font-size: 1em;
 }
 
 table.chess_table tr th.turn_square {
@@ -57,14 +74,78 @@ table.chess_table tr th.turn_square {
 .custom-modal-header {
   background-color: #219161;
   color: #fff;
-  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
   margin-top: -15px;
   margin-bottom: 40px;
 }
 
-.board-container{
+.page-container{
+  // display: flex;
   width: 60%;
   height: 60%;
+}
+
+.board-container {
+  display: flex;
+}
+
+.anaunceText {
+  font-size: 100px;
+}
+
+.anaunceTextWon {
+  color: #afe1af;
+}
+
+.anaunceTextLost {
+  color: #e2b6b3;
+}
+
+.alert {
+  font-size: 50px;
+}
+
+.alertDialog {
+  width: 40vw;
+}
+
+.copyLink {
+  width: 16%;
+  font-size: 20px;
+  color: var(--board-light);
+  display: flex;
+  margin: auto;
+  text-align: center;
+  flex-direction: column;
+}
+
+.copyLink2 {
+  width: 16%;
+  font-size: 40px;
+  color: var(--board-light);
+  display: flex;
+  margin: auto;
+  
+}
+
+.opponent{
+  
+  top: 0px;
+  right: 0px;
+}
+
+.coppybtn {
+  text-align: center;
+  background-color: var(--board-light);
+  color: var(--main-dark-color);
+  // width: 20%;
+  height: 64px;
+  width: 164px;
+}
+
+.coppybtn:not([disabled]):hover {
+  background-color: var(--board-dark);
+  color: var(--board-light);
 }

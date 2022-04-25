@@ -14,7 +14,7 @@ import { UserModel } from 'src/app/model/UserModel';
 export class AuthenticationService {
 
   user: UserModel;
-  private loginUrl = "http://localhost:4713/ochess/login";
+  private loginUrl = "http://localhost:1440/ochess/login";
 
   //@ts-ignore
   user: string;

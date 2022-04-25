@@ -16,17 +16,18 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
-  private loginUrl: string = "http://localhost:4713/ochess/login";
+  private loginUrl: string = "http://localhost:1440/ochess/login";
   private access_token: string | null = "";
-  private verifyUrl = "http://localhost:4713/ochess/api/user/verify";
-  private registerUrl = "http://localhost:4713/ochess/api/user/register";
-  private sendPassResetUrl = "http://localhost:4713/ochess/api/user/send-password-reset";
-  private passResetUrl = "http://localhost:4713/ochess/api/user/reset-password-request";
+  private verifyUrl = "http://localhost:1440/ochess/api/user/verify";
+  private registerUrl = "http://localhost:1440/ochess/api/user/register";
+  private sendPassResetUrl = "http://localhost:1440/ochess/api/user/send-password-reset";
+  private passResetUrl = "http://localhost:1440/ochess/api/user/reset-password-request";
 
   constructor(private router: Router, private tokenService: TokensService, private http: HttpClient) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.access_token = this.tokenService.getAccessToken();
+    console.log(request.url);
 
     if (environment.urlsToSkip.includes(request.url.replace(environment.apiUrl, "")) || request.url == environment.loginUrl || request.url.includes("/verify")) {
       console.log("skiped interceptor: "+request.url)

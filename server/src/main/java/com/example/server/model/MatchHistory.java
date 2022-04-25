@@ -1,8 +1,10 @@
 package com.example.server.model;
 
 import com.example.server.utils.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="matchhistory")
@@ -32,6 +34,18 @@ public class MatchHistory {
     @OneToOne
     @JoinColumn(name="winner")
     private User winner;
+
+    @JsonIgnore
+    @Column(name="datecreated", insertable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime dateCreated;
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public User getWinner() {
         return winner;

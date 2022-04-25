@@ -1,5 +1,5 @@
 .lost {
-    // font-weight: 700;
+    font-weight: 700;
     background-color: #E2B6B3;
     //#FF5252
     // text-decoration: line-through;
@@ -12,27 +12,23 @@
 
 .won {
     font-weight: 700;
-    background-color: #90EE90;
+    background-color: #AFE1AF;
     //#66BB6A
 }
 
 
 .tableNames{
+    font-weight: 700 !important;
     text-align: center !important;
+    background-color: var(--board-dark) !important;
+    color: var(--board-light) !important;
+    font-size: 20px;
     // justify-content: center;
     // flex-flow: row;
 }
 
-.gameHash{
-    max-width: 200px;
-}
-
-.status{
-    max-width: 100px;
-}
-
-.winner{
-    max-width: 200px;
+.opinent{
+    max-width: 400px;
 }
 
 ::ng-deep .p-datatable{
@@ -40,4 +36,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+::ng-deep tr{
+    height: 80px;
+    cursor: pointer;
+}
+
+.historyImg{
+    height: 40px;
+    width: 40px;
+    resize: none;
+    margin: auto;
 }

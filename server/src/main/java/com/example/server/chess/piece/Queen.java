@@ -15,10 +15,10 @@ public class Queen implements Piece, Serializable {
 
     public Queen(Color color) {
         this.color = color;
-        this.initHtmlCode();
+        this.initName();
     }
 
-    private void initHtmlCode() {
+    private void initName() {
         if (this.color == Color.WHITE) {
             this.pieceName = "whiteQueen";
         }else {

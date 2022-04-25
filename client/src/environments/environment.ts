@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4713/ochess/api',
-  loginUrl: "http://localhost:4713/ochess/login",
+  apiUrl: 'http://localhost:1440/ochess/api/',
+  loginUrl: "http://localhost:1440/ochess/login",
 
   urlsToSkip: [
     "user/verify",

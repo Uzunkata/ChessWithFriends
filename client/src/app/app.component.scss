@@ -1,21 +1,20 @@
 :host {
-    --main-dark-color: #42281c;
-    --secondary-dark-color: #a35233;
-    --main-light-color: #f6d2ac;
-    --secondary-light-color: #d6834f;
+  --main-dark-color: #42281c;
+  --secondary-dark-color: #a35233;
+  --main-light-color: #f6d2ac;
+  --secondary-light-color: #d6834f;
 
-    --board-light: #f0d9b5;
-    --board-dark: #b58863;
-  }
+  --board-light: #f0d9b5;
+  --board-dark: #b58863;
+}
 
 ::ng-deep.mat-toolbar {
-    
   background-color: var(--main-dark-color);
 }
 ::ng-deep html {
   background-color: #262626;
 }
-  
+
 .backround {
   /* The image used */
   // background-image: url("https://wallpaperaccess.com/full/2003189.jpg");
@@ -29,12 +28,25 @@
   background-size: cover;
 }
 
-span{
+span {
   // margin: 15px;
 }
 
 ::ng-deep .p-button {
-  border: 0  !important;
+  border: 0 !important;
+  font-size: 17px;
+}
+
+.username {
+  float: right;
+  // margin-left: 60%;
+  color: var(--main-light-color);
+  padding: 3px;
+  font-size: 25px;
+}
+
+::ng-deep .p-button:not([disabled]):hover {
+  border-radius: 10px;
 }
 
 .flexExpand {
@@ -42,15 +54,14 @@ span{
 }
 
 .center {
- display: inline;
+  display: inline;
 }
 
 .loginlbtn {
   margin-left: 2%;
-  color : var(--board-light);
+  color: var(--board-light);
   background-color: var(--board-dark);
   width: 100px;
-
 }
 
 .loginlbtn:not([disabled]):hover {
@@ -63,14 +74,14 @@ span{
 //   background-color: var(--main-light-color);
 // }
 
-.register{
+.register {
   width: 100px;
   margin-left: 65%;
   background-color: var(--board-light);
-  color : var(--main-dark-color);
+  color: var(--main-dark-color);
 }
 
-.register:not([disabled]):hover{
+.register:not([disabled]):hover {
   background-color: var(--board-dark);
   color: var(--board-light);
 }
@@ -81,9 +92,10 @@ span{
 // }
 
 .logoutlbtn {
-  margin-left: 80%;
+  float: right;
+  margin-left: 2%;
   text-align: center;
-  color : var(--board-light);
+  color: var(--board-light);
   background-color: var(--secondary-dark-color);
   width: 20%;
 }
@@ -93,45 +105,39 @@ span{
   color: var(--main-dark-color);
 }
 
-.logoutlbtn[disabled] {
-  color : var(--main-dark-color);
-  background-color: var(--board-light);
-}
-
-.matchHistorybtn{
+.matchHistorybtn {
   margin-left: 20px;
   text-align: center;
-  color : var(--main-light-color);
-  background-color: var(--board-dark);
+  background-color: var(--board-light);
+  color: var(--main-dark-color);
   // width: 20%;
   height: 50%;
 }
 
 .matchHistorybtn:not([disabled]):hover {
-  background-color: var(--board-light);
-  color: var(--main-dark-color);
+  background-color: var(--board-dark);
+  color: var(--board-light);
 }
 
-.matchHistorybtn[disabled] {
-  color : var(--main-dark-color);
-  background-color: var(--main-light-color);
-}
-
-.logodiv{
-  display:flex;
+.logo {
+  display: flex;
   align-items: center;
 }
 
-.logoname{
-color: var(--main-light-color); 
-cursor: pointer;
-padding: 3px;
-// border-right:2px solid var(--board-light);
-// border-bottom:2px solid var(--board-light);
+.logoname {
+  color: var(--main-light-color);
+  cursor: pointer;
+  padding: 3px;
+  font-size: 25px;
+  // border-right:2px solid var(--board-light);
+  // border-bottom:2px solid var(--board-light);
 
-// border-left:2px solid var(--board-light);
-// border-top:2px solid var(--board-light);
+  // border-left:2px solid var(--board-light);
+  // border-top:2px solid var(--board-light);
+}
 
+.logoname:hover {
+  color: var(--board-dark);
 }
 
 /* Extra small devices (phones, 600px and down) /
@@ -150,4 +156,3 @@ padding: 3px;
 //  @media only screen and (max-width: 830) {
 
 // }
-

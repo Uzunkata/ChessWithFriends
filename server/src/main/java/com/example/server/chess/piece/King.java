@@ -15,11 +15,11 @@ public class King implements Piece, Serializable {
 
     public King(Color color) {
         this.color = color;
-        this.initHtmlCode();
+        this.initName();
         this.moved = false;
     }
 
-    private void initHtmlCode() {
+    private void initName() {
         if (this.color == Color.WHITE) {
             this.pieceName = "whiteKing";
         }else {

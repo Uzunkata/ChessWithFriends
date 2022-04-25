@@ -1,8 +1,11 @@
-package com.example.server.websocket;
+package com.example.server.chess.websocket;
 
 import com.example.server.chess.Game;
 import com.example.server.chess.Movement;
 import com.example.server.chess.Player;
+import com.example.server.controller.GameController;
+import com.example.server.dto.Message;
+import com.example.server.dto.ReturnMessage;
 import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

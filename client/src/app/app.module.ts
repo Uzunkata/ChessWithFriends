@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { FormsModule } from "@angular/forms";
-import { environment } from 'src/environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './authentication/login/login.component';
 import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
@@ -18,8 +17,6 @@ import { MessageService } from 'primeng/api';
 // import { ModalModule } from 'angular2-modal';
 // import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 // import { PromotionModal } from './promotion-modal';
-import { v4 as uuidv4 } from 'uuid';
-
 
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -48,12 +45,11 @@ import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from "primeng/password";
 import { MenubarModule } from "primeng/menubar";
-//import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+// import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -67,7 +63,6 @@ import { SelectButtonModule } from "primeng/selectbutton";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { ConfirmEmailComponent } from './authentication/confirm-email/confirm-email.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { HomeComponent } from './home/home.component';
 import { SendPasswordResetComponent } from './authentication/send-password-reset/send-password-reset.component';
 import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
 import { BoardComponent } from './game/board/board.component';
@@ -96,17 +91,16 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
     LoginComponent,
     ConfirmEmailComponent,
     RegisterComponent,
-    HomeComponent,
     SendPasswordResetComponent,
     PasswordResetComponent,
-    // PromotionModal,
     BoardComponent,
     MatchmakingComponent,
-    MatchHistoryComponent
+    MatchHistoryComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    // NgChartsModule,
     SocialLoginModule,
     AppRoutingModule,
     AccordionModule,
@@ -116,7 +110,6 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
     // ModalModule.forRoot(),
     // BootstrapModalModule,
 
-    BrowserAnimationsModule,
     MessagesModule,
     MessageModule,
     ToastModule,
@@ -131,8 +124,6 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
     InputTextModule,
     DynamicDialogModule,
     DialogModule,
-    ConfirmDialogModule,
-    ConfirmDialogModule,
     RippleModule,
     CheckboxModule,
     ConfirmDialogModule,
@@ -147,9 +138,6 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
     MatSortModule,
     ReactiveFormsModule,
 
-    AngularEditorModule,
-    HttpClientModule,
-
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -160,7 +148,6 @@ const CLIENT_ID = '109523009378-pr5h9fdgvf10rs0csm985k3d108e4c1f.apps.googleuser
     ChipsModule,
     SelectButtonModule,
     MatButtonToggleModule,
-    SplitterModule,
 
   ],
   providers: [

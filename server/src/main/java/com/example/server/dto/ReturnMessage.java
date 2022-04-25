@@ -1,4 +1,4 @@
-package com.example.server.websocket;
+package com.example.server.dto;
 
 import com.example.server.chess.Game;
 import com.example.server.chess.Player;

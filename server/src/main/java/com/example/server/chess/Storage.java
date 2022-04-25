@@ -1,4 +1,4 @@
-package com.example.server;
+package com.example.server.chess;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -33,7 +33,7 @@ public class Storage {
             File file = new File(relativeFolder + fileName);
             logger.error("GAMES PATH:"+ file.getAbsolutePath());
             file.getParentFile().mkdirs();
-            FileWriter writer = new FileWriter(file);
+//            FileWriter writer = new FileWriter(file);
             FileOutputStream fos = new FileOutputStream(relativeFolder + fileName);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(bos);

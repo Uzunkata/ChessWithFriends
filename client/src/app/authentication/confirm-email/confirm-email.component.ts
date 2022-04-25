@@ -29,5 +29,6 @@ export class ConfirmEmailComponent implements OnInit {
       );
     this.confirmEmail()
 
+    this.router.navigateByUrl('/login');
   }
 }

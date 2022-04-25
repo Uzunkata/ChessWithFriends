@@ -26,7 +26,7 @@ export class IsNotLoggedGuard implements CanActivate {
       this.router.navigateByUrl(this.curentURL);
       localStorage.removeItem('gameURL')
     }else{
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/matchmaking');
     }
 
     return false;

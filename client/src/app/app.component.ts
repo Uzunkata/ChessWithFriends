@@ -12,10 +12,12 @@ export class AppComponent {
   title = 'frontend';
   isLogedin = false;
   // isGoogle = false;
+  username: string = "";
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private messageService: MessageService){
     this.isLogedin = authenticationService.checkLogin();
     // this.isGoogle = authenticationService.isGoogle;
+    this.username = authenticationService.getUsername();
   }
 
   login() {
