@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
-import {Toast} from "primeng/toast";
+import { Toast } from "primeng/toast";
 import { MessageService } from 'primeng/api';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { LoginService } from './login.service';
 
@@ -25,13 +25,14 @@ export class LoginComponent implements OnInit {
 
   hide = true;
   constructor(private router: Router,
-        private authService: SocialAuthService,
-        private loginService: LoginService,
-        private authenticationService: AuthenticationService) {
+    private authService: SocialAuthService,
+    private loginService: LoginService,
+    private authenticationService: AuthenticationService,
+    private messageService: MessageService) {
 
-          if(authenticationService.checkLogin()){
-            router.navigateByUrl('/matchmaking');
-          }
+    if (authenticationService.checkLogin()) {
+      router.navigateByUrl('/matchmaking');
+    }
   }
 
   ngOnInit(): void {
@@ -46,10 +47,17 @@ export class LoginComponent implements OnInit {
 
   async attemptLogin() {
     try {
-      await this.loginService.login(this.emailOrUsername, this.password)
-      window.location.reload();
-      this.router.navigate(['matchmaking'])
+      var message = await this.loginService.login(this.emailOrUsername, this.password)
+      if (!message) {
+        this.messageService.add({ key: 'login', severity: 'error', summary: 'Error', detail: 'Bad Credentials' });
+      } else if(message == "not verified") {
+        this.messageService.add({ key: 'login', severity: 'error', summary: 'Error', detail: 'User Not Verified' });
+      }else {
+        window.location.reload();
+        this.router.navigate(['matchmaking'])
+      }
     } catch (Exception) {
+      this.messageService.add({ key: 'login', severity: 'error', summary: 'Error', detail: 'User not verified' });
       console.log(Exception)
     }
   }

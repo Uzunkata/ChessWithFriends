@@ -19,9 +19,9 @@ public class GlobalExceptionHandler {
                 .body(exception.getMessage());
     }
 
-    @ExceptionHandler(CustumAuthException.class)
+    @ExceptionHandler(CustomAuthException.class)
     @ResponseBody
-    public ResponseEntity<Object> handleAllOtherErrors(CustumAuthException exception) {
+    public ResponseEntity<Object> handleAllOtherErrors(CustomAuthException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("Invalid password or email!");

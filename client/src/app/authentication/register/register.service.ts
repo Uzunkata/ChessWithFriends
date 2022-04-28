@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/User';
 
@@ -13,6 +13,13 @@ export class RegisterService {
 
   async register(user: User) {
     // console.log(await this.http.post(this.registerUrl, user, {responseType: "text"}));
-    return await this.http.post(this.registerUrl, user, {responseType: "text"}).toPromise();
+    // try{
+    return await this.http.post(this.registerUrl, user, {responseType: "text"}).toPromise().catch((err: HttpErrorResponse) => {
+      // simple logging, but you can do a lot more, see below
+      return err.error;
+    });
+    // }catch (err: HttpErrorResponse){
+    //   return err.message;
+    // }
   }
 }

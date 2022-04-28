@@ -1,6 +1,5 @@
 package com.example.server.security.filter;
 
-import com.example.server.exception.ServiceException;
 import com.example.server.repository.UserRepository;
 import com.example.server.security.JwtProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,10 +30,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Autowired
     private JwtProvider jwtProvider; //= new JwtProvider();
-
-    @Autowired
-    private ServiceException serviceException;
-
 
     private final UserRepository userRepository;
 

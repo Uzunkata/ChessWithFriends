@@ -1,42 +1,42 @@
-
 <div class="registerFields">
-  <div class="center">
+  <p-toast position="top-right" key="register"></p-toast>
 
+  <div class="center">
     <div class="center">
       <div class="p-field p-grid">
-        <label for="email" class="p-col-fixed" >Email</label>
+        <label for="email" class="p-col-fixed">Email</label>
         <div class="p-col">
           <input class="filed" [(ngModel)]="email" id="email" type="text" pInputText>
         </div>
       </div>
       <br>
-        <div class="p-field p-grid">
-          <label for="Username" class="p-col-fixed" >Username</label>
-          <div class="p-col">
-            <input class="filed" [(ngModel)]="username" id="username" type="text" pInputText>
-          </div>
+      <div class="p-field p-grid">
+        <label for="Username" class="p-col-fixed">Username</label>
+        <div class="p-col">
+          <input class="filed" [(ngModel)]="username" id="username" type="text" pInputText>
         </div>
-        <br>
+      </div>
+      <br>
 
       <div class="p-field p-grid" style="padding-bottom: 20px;">
-        <label for="password" class="p-col-fixed" >Password</label>
+        <label for="password" class="p-col-fixed">Password</label>
         <div class="p-col">
           <p-password [(ngModel)]="password" [toggleMask]="true"></p-password>
         </div>
       </div>
-  
+
       <div class="p-field p-grid" style="padding-bottom: 20px;">
-        <label for="password" class="p-col-fixed" >Confirm password</label>
-          <div class="p-col">
-            <p-password [(ngModel)]="passwordConfirm" [toggleMask]="true" [feedback]="false"></p-password>
-          </div>
+        <label for="password" class="p-col-fixed">Confirm password</label>
+        <div class="p-col">
+          <p-password [(ngModel)]="passwordConfirm" [toggleMask]="true" [feedback]="false"></p-password>
+        </div>
       </div>
-  </div>  
+    </div>
 
     <div class="flex">
 
       <button (click)="doRegister()" pButton type="button"
-      class="p-button-raised p-button center register">Register</button>
+        class="p-button-raised p-button center register">Register</button>
     </div>
 
     <!-- <div class="flex">
@@ -49,4 +49,3 @@
     <h3 style="margin-top: 30%; color: red;">{{message}}</h3>
   </div>
 </div>
-

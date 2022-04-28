@@ -3,7 +3,6 @@ package com.example.server.controller;
 import com.example.server.dto.PasswordRequestModel;
 import com.example.server.dto.RecipientConfirmation;
 import com.example.server.exception.CustomException;
-import com.example.server.exception.ServiceException;
 import com.example.server.exception.UserAlreadyExists;
 import com.example.server.model.PasswordReset;
 import com.example.server.model.User;
@@ -35,8 +34,6 @@ import java.time.LocalDateTime;
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    @Autowired
-    private ServiceException serviceException;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -74,19 +71,23 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<?> register(@RequestBody User user) throws MessagingException, TemplateException, IOException, UserAlreadyExists, CustomException {
-        if (userRepository.findByEmail(user.getEmail()) == null && user.getId() == 0) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setVerified(false);
+        if (userRepository.findByEmail(user.getEmail()) == null) {
+            if(userRepository.findByUsername(user.getUsername()) == null) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setVerified(false);
 //            user.setProvider(Provider.LOCAL);
-            userRepository.save(user);
+                userRepository.save(user);
 
-            String hash = jwtProvider.generateEmailVerificationHash();
-            saveEmailVerification(hash, user);
+                String hash = jwtProvider.generateEmailVerificationHash();
+                saveEmailVerification(hash, user);
 
-            RecipientConfirmation recipient = getRecipient(hash, user.getEmail(), "Confirm your email at VWP", "bonus text!");
-            emailService.sendConfirmationMail(recipient, emailVerificationTemplate);
+                RecipientConfirmation recipient = getRecipient(hash, user.getEmail(), "Confirm your email at Chess With Friends", "bonus text!");
+                emailService.sendConfirmationMail(recipient, emailVerificationTemplate);
 
-            return ResponseEntity.ok("user has been created");
+                return ResponseEntity.ok("user has been created");
+            }else {
+                throw new UserAlreadyExists("User with this username already exists!");
+            }
         } else {
             throw new UserAlreadyExists("User with this email already exists!");
         }
